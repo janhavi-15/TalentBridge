@@ -7,4 +7,4 @@ scikit-learn
 joblib
 PyPDF2
 gunicorn
-brevo-python
+sib-api-v3-sdk
