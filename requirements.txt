@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Werkzeug
+pandas
+scikit-learn
+joblib
+PyPDF2
+gunicorn
+brevo-python
