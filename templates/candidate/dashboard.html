@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Candidate Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+display:flex;
+background:#f4f6f9;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:260px;
+height:100vh;
+background:#1f2937;
+color:white;
+position:fixed;
+left:0;
+top:0;
+}
+
+.logo{
+padding:25px;
+text-align:center;
+font-size:28px;
+font-weight:700;
+background:#111827;
+}
+
+.menu{
+margin-top:20px;
+}
+
+.menu a{
+display:block;
+padding:16px 30px;
+color:white;
+text-decoration:none;
+font-size:16px;
+transition:.3s;
+}
+
+.menu a:hover{
+background:#27ae60;
+padding-left:40px;
+}
+
+/* Main */
+
+.main{
+margin-left:260px;
+padding:30px;
+width:100%;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.topbar h2{
+color:#2c3e50;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.card h3{
+font-size:35px;
+color:#27ae60;
+}
+
+.card p{
+margin-top:10px;
+color:#666;
+}
+
+.recent{
+margin-top:40px;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.recent h2{
+margin-bottom:20px;
+color:#2c3e50;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+table th,
+table td{
+padding:14px;
+border-bottom:1px solid #ddd;
+text-align:left;
+}
+
+table th{
+background:#27ae60;
+color:white;
+}
+
+table tr:hover{
+background:#f8f8f8;
+}
+
+.status-applied{
+color:#2563eb;
+font-weight:bold;
+}
+
+.status-shortlisted{
+color:green;
+font-weight:bold;
+}
+
+.status-rejected{
+color:red;
+font-weight:bold;
+}
+
+@media(max-width:1000px){
+.cards{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:700px){
+
+.sidebar{
+width:200px;
+}
+
+.main{
+margin-left:200px;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+table{
+font-size:13px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+TalentBridge
+</div>
+
+<div class="menu">
+
+<a href="{{ url_for('candidate_dashboard') }}">🏠 Dashboard</a>
+
+<a href="{{ url_for('candidate_profile') }}">👤 My Profile</a>
+
+<a href="{{ url_for('candidate_jobs') }}">🔍 Browse Jobs</a>
+
+<a href="{{ url_for('applied_jobs') }}">📄 Applied Jobs</a>
+
+<a href="{{ url_for('saved_jobs') }}">❤️ Saved Jobs</a>
+
+
+<a href="{{ url_for('notifications') }}">🔔 Notifications</a>
+
+<a href="{{ url_for('settings') }}">⚙ Settings</a>
+
+<a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h2>Welcome Candidate 👋</h2>
+
+<div style="display:flex;align-items:center;gap:15px;">
+
+
+
+<h3>{{ user.name }}</h3>
+
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>{{ available_jobs }}</h3>
+<p>Available Jobs</p>
+</div>
+
+<div class="card">
+<h3>{{ applied_jobs }}</h3>
+<p>Applied Jobs</p>
+</div>
+
+<div class="card">
+<h3>{{ saved_jobs }}</h3>
+<p>Saved Jobs</p>
+</div>
+
+<div class="card">
+<h3>{{ profile_percentage }}%</h3>
+<p>Profile Completed</p>
+</div>
+
+</div>
+
+<div class="recent">
+
+<h2>Recent Applications</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Company</th>
+<th>Job Title</th>
+<th>Location</th>
+<th>Salary</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% if recent_applications %}
+
+{% for application, job in recent_applications %}
+
+<tr>
+
+<td>{{ job.company }}</td>
+
+<td>{{ job.title }}</td>
+
+<td>{{ job.location }}</td>
+
+<td>₹{{ job.salary }}</td>
+
+<td>
+
+{% if application.status=="Applied" %}
+<span class="status-applied">Applied</span>
+
+{% elif application.status=="Shortlisted" %}
+<span class="status-shortlisted">Shortlisted</span>
+
+{% elif application.status=="Rejected" %}
+<span class="status-rejected">Rejected</span>
+
+{% else %}
+{{ application.status }}
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+
+<td colspan="5" style="text-align:center;padding:30px;">
+No applications yet.
+</td>
+
+</tr>
+
+{% endif %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

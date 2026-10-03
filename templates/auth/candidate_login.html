@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body{
+            margin:0;
+            font-family:Poppins,sans-serif;
+            background:#f5f7fa;
+        }
+
+        .container{
+            width:400px;
+            margin:80px auto;
+            background:#fff;
+            padding:35px;
+            border-radius:10px;
+            box-shadow:0 10px 25px rgba(0,0,0,.1);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+            color:#2c3e50;
+        }
+
+        .input-box{
+            margin-bottom:20px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:500;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:15px;
+        }
+
+        .btn{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:6px;
+            background:#27ae60;
+            color:#fff;
+            font-size:17px;
+            cursor:pointer;
+        }
+
+        .btn:hover{
+            background:#1e8449;
+        }
+
+        .links{
+            margin-top:20px;
+            text-align:center;
+        }
+
+        .links a{
+            text-decoration:none;
+            color:#27ae60;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Candidate Login</h2>
+
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div style="
+                background:#d4edda;
+                color:#155724;
+                padding:12px;
+                border-radius:6px;
+                margin-bottom:15px;
+                text-align:center;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+<form method="POST">
+
+<div class="input-box">
+<label>Email</label>
+<input type="email" name="email" required>
+</div>
+
+<div class="input-box">
+<label>Password</label>
+<input type="password" name="password" required>
+</div>
+
+<button class="btn">Login</button>
+
+<div class="links">
+<p>
+Don't have an account?
+<a href="{{ url_for('candidate_register') }}">Register</a>
+</p>
+
+<a href="{{ url_for('candidate_forgot_password') }}">
+Forgot Password?
+</a>
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>

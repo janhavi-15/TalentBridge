@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#f4f6f9;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .login-box{
+            width:420px;
+            background:#fff;
+            padding:35px;
+            border-radius:12px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .login-box h2{
+            text-align:center;
+            margin-bottom:30px;
+            color:#2c3e50;
+        }
+
+        .input-group{
+            margin-bottom:20px;
+        }
+
+        .input-group label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:500;
+            color:#555;
+        }
+
+        .input-group input{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:15px;
+        }
+
+        .btn{
+            width:100%;
+            padding:14px;
+            background:#27ae60;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:17px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .btn:hover{
+            background:#219150;
+        }
+
+        .back{
+            text-align:center;
+            margin-top:20px;
+        }
+
+        .back a{
+            text-decoration:none;
+            color:#27ae60;
+        }
+
+        .icon{
+            font-size:55px;
+            text-align:center;
+            margin-bottom:10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="login-box">
+
+    <div class="icon">👨‍💼</div>
+
+    <h2>Admin Login</h2>
+
+    <form method="POST">
+
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter username" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" class="btn">
+            Login
+        </button>
+
+    </form>
+
+    <div class="back">
+        <a href="/">← Back to Home</a>
+    </div>
+
+</div>
+
+</body>
+</html>

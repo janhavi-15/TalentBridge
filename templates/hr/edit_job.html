@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Job</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#eef3f8;
+}
+
+.sidebar{
+width:260px;
+height:100vh;
+background:linear-gradient(180deg,#1e3c72,#2a5298);
+position:fixed;
+left:0;
+top:0;
+}
+
+.sidebar h2{
+color:white;
+text-align:center;
+padding:25px;
+border-bottom:1px solid rgba(255,255,255,.2);
+}
+
+.sidebar a{
+display:block;
+padding:15px 25px;
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+.sidebar a:hover{
+background:rgba(255,255,255,.15);
+padding-left:35px;
+}
+
+.main{
+margin-left:260px;
+padding:40px;
+}
+
+.card{
+background:white;
+max-width:950px;
+margin:auto;
+padding:35px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.card h1{
+text-align:center;
+margin-bottom:30px;
+color:#1e3c72;
+}
+
+.row{
+display:flex;
+gap:20px;
+margin-bottom:18px;
+}
+
+.col{
+flex:1;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:#1e88e5;
+outline:none;
+box-shadow:0 0 6px rgba(30,136,229,.3);
+}
+
+textarea{
+resize:vertical;
+}
+
+.btn{
+margin-top:20px;
+width:100%;
+padding:15px;
+background:#007bff;
+color:white;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+.btn:hover{
+background:#0056b3;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+font-weight:bold;
+color:#1e3c72;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>HR Panel</h2>
+
+<a href="{{ url_for('hr_dashboard') }}">🏠 Dashboard</a>
+<a href="{{ url_for('post_job') }}">➕ Post Job</a>
+<a href="{{ url_for('manage_jobs') }}">📄 Manage Jobs</a>
+<a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<div class="card">
+
+<h1>Update Job</h1>
+
+<form method="POST">
+
+<div class="row">
+
+<div class="col">
+<label>Job Title</label>
+<input type="text" name="title" value="{{ job.title }}" required>
+</div>
+
+<div class="col">
+<label>Company</label>
+<input type="text" name="company" value="{{ job.company }}" required>
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col">
+<label>Location</label>
+<input type="text" name="location" value="{{ job.location }}" required>
+</div>
+
+<div class="col">
+<label>Salary</label>
+<input type="text" name="salary" value="{{ job.salary }}" required>
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col">
+<label>Vacancies</label>
+<input type="number" name="vacancies" value="{{ job.vacancies }}" required>
+</div>
+
+<div class="col">
+<label>Job Type</label>
+
+<select name="job_type">
+
+<option {% if job.job_type=="Full Time" %}selected{% endif %}>Full Time</option>
+<option {% if job.job_type=="Part Time" %}selected{% endif %}>Part Time</option>
+<option {% if job.job_type=="Internship" %}selected{% endif %}>Internship</option>
+<option {% if job.job_type=="Remote" %}selected{% endif %}>Remote</option>
+<option {% if job.job_type=="Hybrid" %}selected{% endif %}>Hybrid</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col">
+<label>Experience</label>
+<input type="text" name="experience" value="{{ job.experience }}">
+</div>
+
+<div class="col">
+<label>Education</label>
+<input type="text" name="education" value="{{ job.education }}">
+</div>
+
+</div>
+
+<label>Skills</label>
+
+<textarea name="skills" rows="4">{{ job.skills }}</textarea>
+
+<br><br>
+
+<label>Incentives / Benefits</label>
+
+<textarea name="incentives" rows="4">{{ job.incentives }}</textarea>
+
+<br><br>
+
+<label>Application Deadline</label>
+
+<input type="date" name="deadline" value="{{ job.deadline }}">
+
+<br><br>
+
+<label>Job Description</label>
+
+<textarea name="description" rows="8">{{ job.description }}</textarea>
+
+<button class="btn" type="submit">
+💾 Update Job
+</button>
+
+</form>
+
+<a class="back" href="{{ url_for('manage_jobs') }}">
+⬅ Back to Manage Jobs
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

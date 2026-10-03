@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Notifications</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+display:flex;
+background:#f5f6fa;
+}
+
+.sidebar{
+width:250px;
+height:100vh;
+background:#1f2937;
+position:fixed;
+color:white;
+}
+
+.logo{
+padding:25px;
+background:#111827;
+font-size:28px;
+font-weight:bold;
+text-align:center;
+}
+
+.sidebar a{
+display:block;
+padding:16px 25px;
+color:white;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#27ae60;
+padding-left:35px;
+transition:.3s;
+}
+
+.main{
+margin-left:250px;
+padding:30px;
+width:100%;
+}
+
+.notification{
+
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-left:6px solid #27ae60;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.notification h3{
+
+color:#1f2937;
+margin-bottom:8px;
+
+}
+
+.notification p{
+
+color:#555;
+
+}
+
+.time{
+
+margin-top:8px;
+font-size:13px;
+color:gray;
+
+}
+
+.empty{
+
+background:white;
+padding:40px;
+text-align:center;
+border-radius:10px;
+font-size:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+TalentBridge
+</div>
+
+<a href="{{ url_for('candidate_dashboard') }}">🏠 Dashboard</a>
+<a href="{{ url_for('candidate_profile') }}">👤 My Profile</a>
+<a href="{{ url_for('candidate_jobs') }}">🔍 Browse Jobs</a>
+<a href="{{ url_for('applied_jobs') }}">📄 Applied Jobs</a>
+<a href="{{ url_for('saved_jobs') }}">❤️ Saved Jobs</a>
+<a href="{{ url_for('resume') }}">📄 Resume</a>
+<a href="{{ url_for('notifications') }}">🔔 Notifications</a>
+<a href="{{ url_for('settings') }}">⚙ Settings</a>
+<a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>Notifications</h1>
+
+<br>
+
+{% if notifications %}
+
+{% for application, job in notifications %}
+
+<div class="notification">
+
+<h3>{{ job.title }} - {{ job.company }}</h3>
+
+{% if application.status=="Applied" %}
+
+<p>✅ Your application has been submitted successfully.</p>
+
+{% elif application.status=="Shortlisted" %}
+
+<p>🎉 Congratulations! You have been shortlisted for this job.</p>
+
+{% elif application.status=="Rejected" %}
+
+<p>❌ Your application was not selected.</p>
+
+{% endif %}
+
+<div class="time">
+
+{{ application.applied_date.strftime("%d-%m-%Y") }}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty">
+
+No Notifications Available
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

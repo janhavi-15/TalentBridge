@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Available Jobs</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#eef2f7;
+    margin:0;
+    color:#333;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    background:#0F4C81;
+    color:white;
+    padding:20px 35px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* ================= MAIN LAYOUT ================= */
+
+.job-search-page{
+    display:flex;
+    gap:25px;
+    max-width:1400px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+/* ================= FILTER SIDEBAR ================= */
+
+.filter-sidebar{
+    width:290px;
+    background:white;
+    padding:22px;
+    border-radius:14px;
+    border:1px solid #ddd;
+    height:fit-content;
+    position:sticky;
+    top:20px;
+}
+
+.filter-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #ddd;
+    padding-bottom:15px;
+}
+
+.filter-header h2{
+    margin:0;
+    color:#123f68;
+}
+
+.filter-header button{
+    border:none;
+    background:none;
+    color:#2563eb;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.filter-group{
+    margin-top:20px;
+}
+
+.filter-group label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.filter-group input,
+.filter-group select{
+    width:100%;
+    padding:11px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    margin-bottom:8px;
+    font-size:14px;
+}
+
+.location-button{
+    width:100%;
+    padding:10px;
+    border:1px solid #2563eb;
+    background:white;
+    color:#2563eb;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.location-button:hover{
+    background:#2563eb;
+    color:white;
+}
+
+#locationStatus{
+    display:block;
+    font-size:12px;
+    margin-top:5px;
+    color:#15803d;
+}
+
+/* ================= RADIUS ================= */
+
+.radius-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.radius-buttons button{
+    padding:7px 12px;
+    border:1px solid #ccc;
+    background:white;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.radius-buttons button:hover,
+.radius-buttons button.selected{
+    background:#2563eb;
+    color:white;
+    border-color:#2563eb;
+}
+
+/* ================= SALARY ================= */
+
+.salary-row{
+    display:flex;
+    gap:8px;
+}
+
+.salary-row input{
+    min-width:0;
+}
+
+/* ================= APPLY BUTTON ================= */
+
+.apply-filter-button{
+    width:100%;
+    margin-top:25px;
+    padding:13px;
+    border:none;
+    background:#2563eb;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.apply-filter-button:hover{
+    background:#1d4ed8;
+}
+
+/* ================= RESULTS ================= */
+
+.job-results{
+    flex:1;
+    min-width:0;
+}
+
+.results-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.results-top h1{
+    margin:0 0 5px;
+    color:#123f68;
+}
+
+.results-top p{
+    margin:0;
+    color:#666;
+}
+
+#sort{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    background:white;
+}
+
+/* ================= JOB CARD ================= */
+
+.job-card{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:18px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 3px 12px rgba(0,0,0,0.06);
+    transition:.2s;
+}
+
+.job-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+}
+
+.job-card h2{
+    color:#123f68;
+    margin:0 0 15px;
+}
+
+.job-card p{
+    margin:8px 0;
+}
+
+.job-distance{
+    color:#15803d;
+    font-weight:bold;
+}
+
+.job-field{
+    display:inline-block;
+    background:#e0f2fe;
+    color:#0369a1;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    margin-top:8px;
+}
+
+.job-skills{
+    margin-top:12px;
+    color:#555;
+}
+
+.skill-tag{
+    display:inline-block;
+    background:#e3f2fd;
+    color:#0369a1;
+    padding:6px 10px;
+    border-radius:20px;
+    margin:4px;
+    font-size:13px;
+}
+
+.view-job{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 18px;
+    background:#16a34a;
+    color:white;
+    text-decoration:none;
+    border-radius:7px;
+    font-weight:600;
+}
+
+.view-job:hover{
+    background:#15803d;
+}
+
+/* ================= EMPTY ================= */
+
+.no-jobs{
+    background:white;
+    border-radius:15px;
+    padding:40px;
+    text-align:center;
+    color:#666;
+}
+
+.no-jobs h3{
+    color:#123f68;
+}
+
+/* ================= LOADING ================= */
+
+.loading{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    color:#555;
+}
+
+/* ================= FLASH ================= */
+
+.flash{
+    width:80%;
+    margin:20px auto;
+    padding:15px;
+    border-radius:8px;
+    text-align:center;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.flash.success{
+    background:#d4edda;
+    color:#155724;
+    border:1px solid #c3e6cb;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    .job-search-page{
+        flex-direction:column;
+    }
+
+    .filter-sidebar{
+        width:auto;
+        position:static;
+    }
+
+    .results-top{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+}
+
+
+
+
+/* ================= MATCH SCORE ================= */
+
+.match-score{
+    display:inline-block;
+    margin:5px 0 15px 0;
+    padding:8px 14px;
+    background:#ecfdf5;
+    color:#166534;
+    border:1px solid #86efac;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.match-score strong{
+    font-size:16px;
+    margin-left:4px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+    Available Jobs
+</div>
+
+
+<!-- ================= FLASH MESSAGE ================= -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        {% for category, message in messages %}
+
+            <div class="flash {{ category }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+
+<!-- ================= PAGE ================= -->
+
+<div class="job-search-page">
+
+
+    <!-- ================= FILTER SIDEBAR ================= -->
+
+    <aside class="filter-sidebar">
+
+
+        <div class="filter-header">
+
+            <h2>Filters</h2>
+
+            <button
+                type="button"
+                onclick="clearFilters()">
+
+                Clear All
+
+            </button>
+
+        </div>
+
+
+        <!-- KEYWORD -->
+
+        <div class="filter-group">
+
+            <label>Keyword</label>
+
+            <input
+                type="text"
+                id="keyword"
+                placeholder="Title, skill, company">
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="filter-group">
+
+            <label>Location 📍</label>
+
+            <input
+                type="text"
+                id="location"
+                placeholder="City">
+
+            <button
+                type="button"
+                class="location-button"
+                onclick="getCandidateLocation()">
+
+                📍 Use My GPS Location
+
+            </button>
+
+            <span id="locationStatus">
+                Location not detected
+            </span>
+
+        </div>
+
+
+        <!-- RADIUS -->
+
+        <div class="filter-group">
+
+            <label>Jobs Near Me</label>
+
+            <div class="radius-buttons">
+
+    <button type="button" onclick="setRadius(5)" id="radius-5">
+        5 km
+    </button>
+
+    <button type="button" onclick="setRadius(10)" id="radius-10">
+        10 km
+    </button>
+
+    <button type="button" onclick="setRadius(25)" id="radius-25">
+        25 km
+    </button>
+
+    <button type="button" onclick="setRadius(50)" id="radius-50">
+        50 km
+    </button>
+
+</div>
+
+<p id="radiusStatus" style="
+    font-size:13px;
+    color:#2563eb;
+    margin-top:10px;
+"></p>
+
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <div class="filter-group">
+
+            <label>Category</label>
+
+            <select id="field">
+
+                <option value="">Any</option>
+
+                <option value="IT & Software">
+                    IT & Software
+                </option>
+
+                <option value="Healthcare">
+                    Healthcare
+                </option>
+
+                <option value="Finance">
+                    Finance
+                </option>
+
+                <option value="Education">
+                    Education
+                </option>
+
+                <option value="Sales">
+                    Sales
+                </option>
+
+                <option value="Marketing">
+                    Marketing
+                </option>
+
+                <option value="Human Resources">
+                    Human Resources
+                </option>
+
+                <option value="Engineering">
+                    Engineering
+                </option>
+
+                <option value="Data & Analytics">
+                    Data & Analytics
+                </option>
+
+                <option value="Design & Creative">
+                    Design & Creative
+                </option>
+
+                <option value="Logistics">
+                    Logistics
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- JOB TYPE -->
+
+        <div class="filter-group">
+
+            <label>Job Type</label>
+
+            <select id="job_type">
+
+                <option value="">Any</option>
+
+                <option value="Full Time">
+                    Full Time
+                </option>
+
+                <option value="Part Time">
+                    Part Time
+                </option>
+
+                <option value="Internship">
+                    Internship
+                </option>
+
+                <option value="Contract">
+                    Contract
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- WORK MODE -->
+
+        <div class="filter-group">
+
+            <label>Work Mode</label>
+
+            <select id="work_mode">
+
+                <option value="">Any</option>
+
+                <option value="Work From Office">
+                    Work From Office
+                </option>
+
+                <option value="Hybrid">
+                    Hybrid
+                </option>
+
+                <option value="Remote">
+                    Remote
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- EDUCATION -->
+
+        <div class="filter-group">
+
+            <label>Education</label>
+
+            <select id="education">
+
+                <option value="">
+                    Any
+                </option>
+
+                <option value="10th">
+                    10th
+                </option>
+
+                <option value="12th">
+                    12th
+                </option>
+
+                <option value="Diploma">
+                    Diploma
+                </option>
+
+                <option value="Graduate">
+                    Graduate
+                </option>
+
+                <option value="Post Graduate">
+                    Post Graduate
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="filter-group">
+
+            <label>Experience</label>
+
+            <select id="experience">
+
+                <option value="">
+                    Any
+                </option>
+
+                <option value="Fresher">
+                    Fresher
+                </option>
+
+                <option value="0-1 Years">
+                    0-1 Years
+                </option>
+
+                <option value="1-3 Years">
+                    1-3 Years
+                </option>
+
+                <option value="3-5 Years">
+                    3-5 Years
+                </option>
+
+                <option value="5+ Years">
+                    5+ Years
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- SALARY -->
+
+        <div class="filter-group">
+
+            <label>Salary</label>
+
+            <div class="salary-row">
+
+                <input
+                    type="number"
+                    id="min_salary"
+                    placeholder="Min ₹">
+
+                <input
+                    type="number"
+                    id="max_salary"
+                    placeholder="Max ₹">
+
+            </div>
+
+        </div>
+
+
+        <!-- DATE POSTED -->
+
+        <div class="filter-group">
+
+            <label>Date Posted</label>
+
+            <select id="date_posted">
+
+                <option value="">
+                    Any
+                </option>
+
+                <option value="1">
+                    Last 24 hours
+                </option>
+
+                <option value="7">
+                    Last 7 days
+                </option>
+
+                <option value="30">
+                    Last 30 days
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="apply-filter-button"
+            onclick="applyFilters()">
+
+            Apply Filters
+
+        </button>
+
+
+    </aside>
+
+
+    <!-- ================= RESULTS ================= -->
+
+    <main class="job-results">
+
+
+        <div class="results-top">
+
+            <div>
+
+                <h1>
+                    Find Your Next Job
+                </h1>
+
+                <p id="resultCount">
+                    Loading jobs...
+                </p>
+
+            </div>
+
+
+            <select id="sortJobs" onchange="changeSort(this.value)">
+
+                <option value="match">
+                    🧠 Best Match
+                </option>
+
+                <option value="recent">
+                    🕐 Recent
+                </option>
+
+                <option value="distance">
+                    📍 Nearest First
+                </option>
+
+                <option value="salary">
+                    💰 Highest Salary
+                </option>
+
+            </select>
+
+            
+
+        </div>
+
+
+        <!-- JS WILL INSERT JOBS HERE -->
+
+        <div id="jobList">
+
+            <div class="loading">
+                Loading available jobs...
+            </div>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<script>
+
+let candidateLat = null;
+let candidateLng = null;
+let selectedRadius = null;
+
+
+/* =========================================================
+   GET GPS LOCATION
+========================================================= */
+
+function getCandidateLocation() {
+
+    const status = document.getElementById("locationStatus");
+
+    if (!navigator.geolocation) {
+
+        status.textContent =
+            "GPS is not supported by this browser.";
+
+        return;
+    }
+
+    status.textContent =
+        "Detecting location...";
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            candidateLat =
+                position.coords.latitude;
+
+            candidateLng =
+                position.coords.longitude;
+
+
+            console.log("GPS Latitude:", candidateLat);
+            console.log("GPS Longitude:", candidateLng);
+
+
+            status.textContent =
+                "✓ Location detected";
+
+
+            /*
+             * Do NOT automatically apply a radius just because GPS
+             * was detected. GPS and radius are separate filters.
+             *
+             * If the user selected Nearest First, we need a radius
+             * only to limit the result set. Use 50 km as the default
+             * in that case. If the user clicked a radius button,
+             * selectedRadius is already set and we apply it.
+             */
+            const currentSort =
+                document.getElementById("sortJobs").value;
+
+            if (currentSort === "distance" && selectedRadius === null) {
+                selectedRadius = 50;
+                document.getElementById("radius-50").classList.add("selected");
+            }
+
+            if (selectedRadius !== null || currentSort === "distance") {
+                applyFilters();
+            }
+
+        },
+
+        function(error) {
+
+            console.error(
+                "GPS Error:",
+                error
+            );
+
+            status.textContent =
+                "Please allow location access.";
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+
+    );
+
+}
+
+/* =========================================================
+   SET RADIUS
+========================================================= */
+
+function setRadius(radius) {
+
+    selectedRadius = Number(radius);
+
+    document
+        .querySelectorAll(".radius-buttons button")
+        .forEach(function(btn) {
+            btn.classList.remove("selected");
+        });
+
+    const selectedButton =
+        document.getElementById("radius-" + radius);
+
+    if (selectedButton) {
+        selectedButton.classList.add("selected");
+    }
+
+    document.getElementById("radiusStatus").textContent =
+        "Jobs within " + radius + " km";
+
+    /* Radius requires GPS. If GPS is not ready, request it.
+       selectedRadius is already stored, so the GPS callback will
+       automatically run applyFilters(). */
+    if (candidateLat === null || candidateLng === null) {
+        getCandidateLocation();
+        return;
+    }
+
+    applyFilters();
+}
+
+/* =========================================================
+   APPLY FILTERS
+========================================================= */
+
+function applyFilters() {
+
+    const sortSelect = document.getElementById("sortJobs");
+
+    // Keep the currently selected sorting option.
+    const currentSort = sortSelect ? sortSelect.value : "match";
+
+    const data = {
+
+        keyword:
+            document.getElementById("keyword").value.trim(),
+
+        location:
+            document.getElementById("location").value.trim(),
+
+        field:
+            document.getElementById("field").value,
+
+        job_type:
+            document.getElementById("job_type").value,
+
+        work_mode:
+            document.getElementById("work_mode").value,
+
+        education:
+            document.getElementById("education").value,
+
+        experience:
+            document.getElementById("experience").value,
+
+        min_salary:
+            document.getElementById("min_salary").value,
+
+        max_salary:
+            document.getElementById("max_salary").value,
+
+        date_posted:
+            document.getElementById("date_posted").value,
+
+        // THIS IS IMPORTANT:
+        // The backend uses this value to decide the sorting.
+        sort: currentSort,
+
+        latitude: candidateLat !== null ? Number(candidateLat) : null,
+        longitude: candidateLng !== null ? Number(candidateLng) : null,
+        radius: selectedRadius !== null ? Number(selectedRadius) : null
+    };
+
+    console.log("FILTER DATA:", data);
+    console.log("SELECTED SORT:", currentSort);
+
+    document.getElementById("jobList").innerHTML = `
+        <div class="loading">
+            Searching jobs...
+        </div>
+    `;
+
+    fetch(
+        "{{ url_for('filter_jobs') }}",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }
+    )
+    .then(function(response) {
+
+        if (!response.ok) {
+            throw new Error(
+                "HTTP Error: " + response.status
+            );
+        }
+
+        return response.json();
+    })
+    .then(function(data) {
+
+        console.log("FILTERED JOBS:", data);
+
+        if (!data.success) {
+            throw new Error(
+                data.error ||
+                data.message ||
+                "Unable to load jobs"
+            );
+        }
+
+        let jobs = Array.isArray(data.jobs) ? data.jobs : [];
+
+        /* Defensive frontend sorting. The backend is the source of truth,
+           but this guarantees the visible order also matches the selected
+           option if a browser receives the array in a different order. */
+        if (currentSort === "distance") {
+            jobs.sort(function(a, b) {
+                const da = a.distance !== null && a.distance !== undefined
+                    ? Number(a.distance)
+                    : Number.POSITIVE_INFINITY;
+                const db = b.distance !== null && b.distance !== undefined
+                    ? Number(b.distance)
+                    : Number.POSITIVE_INFINITY;
+                return da - db;
+            });
+        } else if (currentSort === "salary") {
+            jobs.sort(function(a, b) {
+                return salaryNumber(b.salary) - salaryNumber(a.salary);
+            });
+        } else if (currentSort === "recent") {
+            jobs.sort(function(a, b) {
+                return Number(b.id || 0) - Number(a.id || 0);
+            });
+        } else if (currentSort === "match") {
+            jobs.sort(function(a, b) {
+                return Number(b.score || 0) - Number(a.score || 0);
+            });
+        }
+
+        console.table(jobs.map(function(job) {
+            return {
+                id: job.id,
+                title: job.title,
+                score: job.score,
+                distance: job.distance,
+                salary: job.salary
+            };
+        }));
+
+        displayJobs(jobs);
+
+        document.getElementById("resultCount").textContent =
+            (data.count || 0) + " jobs found";
+
+        // Keep the URL in sync WITHOUT reloading the page.
+        const url = new URL(window.location.href);
+        url.searchParams.set("sort_by", currentSort);
+        window.history.replaceState({}, "", url.toString());
+    })
+    .catch(function(error) {
+
+        console.error("Filter error:", error);
+
+        document.getElementById("jobList").innerHTML = `
+            <div class="no-jobs">
+                <h3>Unable to load jobs</h3>
+                <p>${escapeHTML(error.message || "Please check the filter route.")}</p>
+            </div>
+        `;
+    });
+}
+
+
+/* =========================================================
+   CHANGE SORT
+========================================================= */
+
+function changeSort(value) {
+
+    const allowed = [
+        "match",
+        "recent",
+        "distance",
+        "salary"
+    ];
+
+    if (!allowed.includes(value)) {
+        value = "match";
+    }
+
+    document.getElementById("sortJobs").value = value;
+
+    console.log("SORT CHANGED TO:", value);
+
+    /*
+     * Nearest First requires candidate GPS coordinates.
+     * If GPS is unavailable, request it. The GPS callback will
+     * then call applyFilters() with the same selected sort.
+     */
+    if (value === "distance") {
+
+        if (candidateLat === null || candidateLng === null) {
+            getCandidateLocation();
+            return;
+        }
+
+        /* If no radius was selected, search within 50 km. */
+        if (selectedRadius === null) {
+            selectedRadius = 50;
+
+            document
+                .querySelectorAll(".radius-buttons button")
+                .forEach(function(btn) {
+                    btn.classList.remove("selected");
+                });
+
+            document
+                .getElementById("radius-50")
+                .classList.add("selected");
+
+            document.getElementById("radiusStatus").textContent =
+                "Jobs within 50 km";
+        }
+    }
+
+    applyFilters();
+}
+
+function salaryNumber(value) {
+
+    if (value === null || value === undefined) {
+        return 0;
+    }
+
+    const text = String(value)
+        .replace(/,/g, "")
+        .replace(/₹/g, "")
+        .replace(/rs\.?/gi, "")
+        .replace(/inr/gi, "");
+
+    const numbers = text.match(/\d+(?:\.\d+)?/g);
+
+    if (!numbers || numbers.length === 0) {
+        return 0;
+    }
+
+    return Math.max.apply(
+        null,
+        numbers.map(Number)
+    );
+}
+
+
+/* =========================================================
+   DISPLAY JOBS
+========================================================= */
+
+function displayJobs(jobs) {
+
+    const container = document.getElementById("jobList");
+
+    container.innerHTML = "";
+
+    /*
+     * No jobs
+     */
+    if (!jobs || jobs.length === 0) {
+
+        container.innerHTML = `
+            <div class="no-jobs">
+                <h3>No jobs found</h3>
+                <p>
+                    Try changing your filters
+                    or increasing your location radius.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+    /*
+     * Display jobs
+     */
+    jobs.forEach(function(job) {
+
+        let distanceHTML = "";
+
+        if (
+            job.distance !== null &&
+            job.distance !== undefined
+        ) {
+
+            distanceHTML = `
+                <p class="job-distance">
+                    📍 ${escapeHTML(job.distance)} km away
+                </p>
+            `;
+        }
+
+
+        /*
+         * =========================
+         * MATCH SCORE
+         * =========================
+         */
+
+        let scoreHTML = "";
+
+        if (
+            job.score !== null &&
+            job.score !== undefined
+        ) {
+
+            let score = parseFloat(job.score);
+
+            if (!isNaN(score)) {
+
+                score = score.toFixed(2);
+
+                scoreHTML = `
+                    <div class="match-score">
+                        🎯 Match Score:
+                        <strong>${score}%</strong>
+                    </div>
+                `;
+
+            }
+        }
+
+
+        /*
+         * Skills
+         */
+
+        let skillsHTML = "";
+
+        if (job.skills) {
+
+            const skills =
+                String(job.skills).split(",");
+
+            skills.forEach(function(skill) {
+
+                if (skill.trim()) {
+
+                    skillsHTML += `
+                        <span class="skill-tag">
+                            ${escapeHTML(skill.trim())}
+                        </span>
+                    `;
+
+                }
+
+            });
+
+        }
+
+
+        /*
+         * Field
+         */
+
+        let fieldHTML = "";
+
+        if (job.field) {
+
+            fieldHTML = `
+                <p class="job-field">
+                    📂 ${escapeHTML(job.field)}
+                </p>
+            `;
+
+        }
+
+
+        /*
+         * Job Card
+         */
+
+        container.innerHTML += `
+
+            <div class="job-card">
+
+                <h2>
+                    ${escapeHTML(
+                        job.title || "Untitled Job"
+                    )}
+                </h2>
+
+                ${scoreHTML}
+
+                <p>
+                    🏢
+                    <strong>
+                        ${escapeHTML(
+                            job.company ||
+                            "Company not specified"
+                        )}
+                    </strong>
+                </p>
+
+                <p>
+                    📍
+                    ${escapeHTML(
+                        job.location ||
+                        "Location not specified"
+                    )}
+                </p>
+
+                ${distanceHTML}
+
+                <p>
+                    💰
+                    ${escapeHTML(
+                        job.salary ||
+                        "Not disclosed"
+                    )}
+                </p>
+
+                <p>
+                    💼
+                    ${escapeHTML(
+                        job.job_type ||
+                        "Not specified"
+                    )}
+                </p>
+
+                <p>
+                    🏠
+                    ${escapeHTML(
+                        job.work_mode ||
+                        "Not specified"
+                    )}
+                </p>
+
+                <p>
+                    🎓
+                    ${escapeHTML(
+                        job.education ||
+                        "Not specified"
+                    )}
+                </p>
+
+                <p>
+                    ⏳
+                    ${escapeHTML(
+                        job.experience ||
+                        "Not specified"
+                    )}
+                </p>
+
+                <p>
+                    📅
+                    Last Date:
+                    ${escapeHTML(
+                        job.deadline ||
+                        "Not specified"
+                    )}
+                </p>
+
+                ${fieldHTML}
+
+                <div class="job-skills">
+                    ${skillsHTML}
+                </div>
+
+                <a
+                    class="view-job"
+                    href="/candidate/job/${encodeURIComponent(job.id)}"
+                    class="view-job"
+                >
+                    View Details
+                </a>
+
+            </div>
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   CLEAR FILTERS
+========================================================= */
+
+function clearFilters() {
+
+    document.getElementById("keyword").value = "";
+    document.getElementById("location").value = "";
+    document.getElementById("field").value = "";
+    document.getElementById("job_type").value = "";
+    document.getElementById("work_mode").value = "";
+    document.getElementById("education").value = "";
+    document.getElementById("experience").value = "";
+    document.getElementById("min_salary").value = "";
+    document.getElementById("max_salary").value = "";
+    document.getElementById("date_posted").value = "";
+
+    // Clear filters always returns to Best Match.
+    document.getElementById("sortJobs").value = "match";
+
+    selectedRadius = null;
+
+    document.getElementById("radiusStatus").textContent = "";
+
+    document
+        .querySelectorAll(".radius-buttons button")
+        .forEach(function(button) {
+            button.classList.remove("selected");
+        });
+
+    if (candidateLat !== null && candidateLng !== null) {
+        document.getElementById("locationStatus").textContent =
+            "✓ Location detected";
+    } else {
+        document.getElementById("locationStatus").textContent =
+            "Location not detected";
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("sort_by", "match");
+    window.history.replaceState({}, "", url.toString());
+
+    applyFilters();
+}
+
+
+/* =========================================================
+   PAGE LOAD
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const urlParams = new URLSearchParams(
+            window.location.search
+        );
+
+        let initialSort =
+            urlParams.get("sort_by") || "match";
+
+        // Accept old URL values too.
+        if (initialSort === "best_match" || initialSort === "best match") {
+            initialSort = "match";
+        }
+
+        if (initialSort === "latest") {
+            initialSort = "recent";
+        }
+
+        if (initialSort === "nearest" || initialSort === "nearest first") {
+            initialSort = "distance";
+        }
+
+        if (initialSort === "highest salary") {
+            initialSort = "salary";
+        }
+
+        const sortSelect =
+            document.getElementById("sortJobs");
+
+        const validSorts = [
+            "match",
+            "recent",
+            "distance",
+            "salary"
+        ];
+
+        if (!validSorts.includes(initialSort)) {
+            initialSort = "match";
+        }
+
+        sortSelect.value = initialSort;
+
+        console.log(
+            "INITIAL SORT:",
+            initialSort
+        );
+
+        applyFilters();
+    }
+);
+
+</script>
+
+</body>
+</html>

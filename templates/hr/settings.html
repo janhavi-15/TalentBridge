@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>HR Settings - TalentBridge</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f5f7fa;
+
+            color: #222;
+        }
+
+
+        /* =====================================
+           SIDEBAR
+        ===================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 325px;
+
+            height: 100vh;
+
+            background: linear-gradient(
+                180deg,
+                #14558a,
+                #1768ad
+            );
+
+            color: white;
+
+            padding-top: 30px;
+        }
+
+
+        .sidebar h1 {
+
+            text-align: center;
+
+            margin: 0 0 35px;
+
+            font-size: 30px;
+        }
+
+
+        .sidebar a {
+
+            display: block;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            padding: 13px 30px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .sidebar a:hover {
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.12
+            );
+        }
+
+
+        .sidebar a.active {
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.20
+            );
+
+            border-left: 5px solid white;
+        }
+
+
+        /* =====================================
+           MAIN
+        ===================================== */
+
+        .main {
+
+            margin-left: 325px;
+
+            padding: 40px 50px;
+        }
+
+
+        .main h2 {
+
+            font-size: 36px;
+
+            margin-top: 0;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================
+           SETTINGS CARD
+        ===================================== */
+
+        .settings-card {
+
+            background: white;
+
+            max-width: 950px;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 4px 18px
+                rgba(0, 0, 0, 0.10);
+        }
+
+
+        .settings-card h3 {
+
+            margin-top: 0;
+
+            color: #1768ad;
+
+            font-size: 23px;
+
+            padding-bottom: 15px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        /* =====================================
+           FORM
+        ===================================== */
+
+        .form-row {
+
+            display: flex;
+
+            gap: 25px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group {
+
+            flex: 1;
+        }
+
+
+        label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            color: #333;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        input:focus {
+
+            border-color: #1768ad;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(23, 104, 173, 0.10);
+        }
+
+
+        input[readonly] {
+
+            background: #f1f3f5;
+
+            cursor: not-allowed;
+        }
+
+
+        .help-text {
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+        }
+
+
+        /* =====================================
+           BUTTON
+        ===================================== */
+
+        .save-btn {
+
+            padding: 13px 30px;
+
+            background: #198754;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        .save-btn:hover {
+
+            background: #157347;
+        }
+
+
+        .back-btn {
+
+            display: inline-block;
+
+            margin-left: 10px;
+
+            padding: 13px 30px;
+
+            background: #1768ad;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+        }
+
+
+        .back-btn:hover {
+
+            background: #14558a;
+        }
+
+
+        /* =====================================
+           SECURITY NOTE
+        ===================================== */
+
+        .security-note {
+
+            background: #eef6ff;
+
+            border-left: 5px solid #1768ad;
+
+            padding: 15px;
+
+            border-radius: 7px;
+
+            margin-bottom: 20px;
+
+            color: #444;
+        }
+
+
+        /* =====================================
+           ALERT
+        ===================================== */
+
+        .alert {
+
+            max-width: 950px;
+
+            padding: 13px 18px;
+
+            margin-bottom: 20px;
+
+            border-radius: 8px;
+
+            background: #d1e7dd;
+
+            color: #0f5132;
+
+            font-weight: 500;
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+
+                width: 220px;
+            }
+
+
+            .main {
+
+                margin-left: 220px;
+
+                padding: 25px;
+            }
+
+
+            .form-row {
+
+                flex-direction: column;
+
+                gap: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     SIDEBAR
+===================================== -->
+
+<div class="sidebar">
+
+    <h1>HR Panel</h1>
+
+
+    <a href="{{ url_for('hr_dashboard') }}">
+        🏠 Dashboard
+    </a>
+
+
+    <a href="{{ url_for('post_job') }}">
+        ➕ Post Job
+    </a>
+
+
+    <a href="{{ url_for('manage_jobs') }}">
+        📄 Manage Jobs
+    </a>
+
+
+    <a href="{{ url_for('applicants') }}">
+        👥 Applicants
+    </a>
+
+
+    <a href="{{ url_for('shortlisted') }}">
+        ✉ Shortlisted
+    </a>
+
+
+    <a href="{{ url_for('hr_settings') }}"
+       class="active">
+        ⚙ Settings
+    </a>
+
+
+    <a href="{{ url_for('hr_profile') }}">
+        👤 My Profile
+    </a>
+
+
+    <a href="{{ url_for('logout') }}">
+        🚪 Logout
+    </a>
+
+</div>
+
+
+<!-- =====================================
+     MAIN CONTENT
+===================================== -->
+
+<div class="main">
+
+
+    <h2>Settings</h2>
+
+
+    <!-- =================================
+         FLASH MESSAGES
+    ================================== -->
+
+    {% with messages =
+        get_flashed_messages(
+            with_categories=true
+        )
+    %}
+
+        {% for category, message in messages %}
+
+            <div class="alert">
+
+                {{ message }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endwith %}
+
+
+
+    <!-- =================================
+         ACCOUNT SETTINGS
+    ================================== -->
+
+    <div class="settings-card">
+
+        <h3>
+            👤 Account Settings
+        </h3>
+
+
+        <form method="POST">
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ hr.name or '' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ hr.email or '' }}"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="text"
+                        name="mobile"
+                        value="{{ hr.mobile or '' }}"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Company
+                    </label>
+
+                    <input
+                        type="text"
+                        name="company"
+                        value="{{ hr.company or '' }}"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        name="location"
+                        value="{{ hr.location or '' }}"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Account Type
+                    </label>
+
+                    <input
+                        type="text"
+                        value="HR / Recruiter"
+                        readonly
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================
+                 PASSWORD
+            ================================== -->
+
+            <h3 style="margin-top:35px;">
+                🔐 Change Password
+            </h3>
+
+
+            <div class="security-note">
+
+                For security, enter your current password
+                before creating a new password.
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Current Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="current_password"
+                        placeholder="Enter current password"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="new_password"
+                        placeholder="Enter new password"
+                        minlength="6"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Confirm New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        placeholder="Confirm new password"
+                        minlength="6"
+                    >
+
+                    <div class="help-text">
+                        Minimum 6 characters.
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================
+                 BUTTONS
+            ================================== -->
+
+            <button
+                type="submit"
+                class="save-btn"
+            >
+                💾 Save Settings
+            </button>
+
+
+            <a
+                href="{{ url_for('hr_dashboard') }}"
+                class="back-btn"
+            >
+                ← Back to Dashboard
+            </a>
+
+
+        </form>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

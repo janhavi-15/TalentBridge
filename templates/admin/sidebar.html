@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+.sidebar{
+
+width:260px;
+height:100vh;
+background:#1f2937;
+position:fixed;
+left:0;
+top:0;
+overflow:auto;
+
+}
+
+.logo{
+
+background:#111827;
+color:white;
+padding:25px;
+font-size:30px;
+font-weight:bold;
+text-align:center;
+
+}
+
+.menu{
+
+margin-top:20px;
+
+}
+
+.menu a{
+
+display:block;
+padding:16px 25px;
+color:white;
+text-decoration:none;
+font-size:17px;
+transition:.3s;
+
+}
+
+.menu a:hover{
+
+background:#27ae60;
+padding-left:35px;
+
+}
+
+.menu a.active{
+
+background:#27ae60;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+TalentBridge Admin
+
+</div>
+
+<div class="menu">
+
+<a href="/admin/dashboard">🏠 Dashboard</a>
+
+<a href="/admin/candidates">👨 Manage Candidates</a>
+
+<a href="/admin/hr">🏢 Manage HR</a>
+
+<a href="/admin/jobs">💼 Manage Jobs</a>
+
+<a href="/admin/applications">📄 Applications</a>
+
+<a href="/admin/reports">📊 Reports</a>
+
+<a href="/admin/settings">⚙ Settings</a>
+
+<a href="/logout">🚪 Logout</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

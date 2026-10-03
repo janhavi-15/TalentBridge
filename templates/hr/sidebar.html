@@ -1,0 +1,41 @@
+<div class="sidebar">
+
+    <div class="logo">
+        <h2>AI Recruit</h2>
+        <p>HR Portal</p>
+    </div>
+
+    <a href="{{ url_for('hr_dashboard') }}">
+        🏠 Dashboard
+    </a>
+
+    <a href="{{ url_for('post_job') }}">
+        ➕ Post Job
+    </a>
+
+    <a href="{{ url_for('manage_jobs') }}">
+        💼 Manage Jobs
+    </a>
+
+    <a href="{{ url_for('applicants') }}">
+        👥 Applicants
+    </a>
+
+    <a href="{{ url_for('shortlisted') }}">
+        ⭐ Shortlisted
+    </a>
+
+    <a href="{{ url_for('hr_settings') }}">
+        ⚙️ Settings
+    </a>
+
+    <a href="{{ url_for('hr_profile') }}">
+    👤 My Profile
+</a>
+
+
+    <a href="{{ url_for('logout') }}">
+        🚪 Logout
+    </a>
+
+</div>

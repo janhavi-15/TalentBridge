@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Candidate Profile | TalentBridge</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:"Segoe UI", Arial, sans-serif;
+        }
+
+        body{
+            background:#eef2f7;
+            color:#263238;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar{
+            position:fixed;
+            left:0;
+            top:0;
+            width:240px;
+            height:100vh;
+            background:#0F4C81;
+            overflow:auto;
+        }
+
+        .sidebar h2{
+            color:white;
+            text-align:center;
+            padding:25px 10px;
+            border-bottom:1px solid rgba(255,255,255,.2);
+        }
+
+        .sidebar a{
+            display:block;
+            color:white;
+            padding:15px 25px;
+            text-decoration:none;
+            font-size:16px;
+            transition:.3s;
+        }
+
+        .sidebar a:hover{
+            background:#08365b;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main{
+            margin-left:240px;
+            padding:35px;
+            max-width:1450px;
+        }
+
+        .page-title{
+            font-size:38px;
+            color:#0F4C81;
+            margin-bottom:25px;
+        }
+
+
+        /* ================= PROFILE HEADER ================= */
+
+        .profile-header{
+            background:white;
+            border-radius:18px;
+            padding:30px;
+            display:flex;
+            align-items:center;
+            gap:28px;
+            box-shadow:0 5px 20px rgba(0,0,0,.12);
+            margin-bottom:25px;
+        }
+
+        .profile-photo{
+            width:135px;
+            height:135px;
+            border-radius:50%;
+            object-fit:cover;
+            border:5px solid white;
+            box-shadow:0 4px 15px rgba(0,0,0,.15);
+            background:#e8eef5;
+        }
+
+        .profile-placeholder{
+            width:135px;
+            height:135px;
+            border-radius:50%;
+            background:#dbeafe;
+            color:#0F4C81;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:55px;
+            font-weight:bold;
+            border:5px solid white;
+            box-shadow:0 4px 15px rgba(0,0,0,.15);
+        }
+
+        .profile-info{
+            flex:1;
+        }
+
+        .profile-info h1{
+            color:#123f68;
+            font-size:30px;
+            margin-bottom:8px;
+        }
+
+        .profile-info p{
+            color:#667085;
+            margin:7px 0;
+            font-size:15px;
+        }
+
+        .status{
+            display:inline-block;
+            margin-top:12px;
+            padding:7px 15px;
+            border-radius:20px;
+            background:#e9f9ef;
+            color:#168c48;
+            font-size:13px;
+            font-weight:600;
+        }
+
+
+        /* ================= PROFILE GRID ================= */
+
+        .profile-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:25px;
+        }
+
+        .card{
+            background:white;
+            border-radius:15px;
+            padding:25px;
+            box-shadow:0 4px 18px rgba(0,0,0,.08);
+        }
+
+        .card.full{
+            grid-column:1 / -1;
+        }
+
+        .card-header{
+            border-bottom:1px solid #e5e7eb;
+            padding-bottom:14px;
+            margin-bottom:20px;
+        }
+
+        .card-title{
+            color:#0F4C81;
+            font-size:20px;
+            font-weight:700;
+        }
+
+
+        /* ================= INFORMATION ================= */
+
+        .info-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+        }
+
+        .info-item{
+            background:#f8fafc;
+            padding:15px;
+            border-radius:10px;
+            border:1px solid #e5eaf0;
+        }
+
+        .info-item label{
+            display:block;
+            font-size:13px;
+            font-weight:600;
+            color:#667085;
+            margin-bottom:7px;
+        }
+
+        .info-item p{
+            color:#1e293b;
+            font-size:16px;
+            word-break:break-word;
+        }
+
+
+        /* ================= SKILLS ================= */
+
+        .skills-container{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+        }
+
+        .skill{
+            background:#eaf7ef;
+            color:#168c48;
+            border:1px solid #bce8cc;
+            padding:8px 14px;
+            border-radius:20px;
+            font-size:14px;
+            font-weight:600;
+        }
+
+
+        /* ================= RESUME ================= */
+
+        .resume-box{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:20px;
+            background:#f8fafc;
+            border:1px solid #e3e8ee;
+            padding:20px;
+            border-radius:12px;
+        }
+
+        .resume-name{
+            font-size:16px;
+            font-weight:600;
+            color:#344054;
+        }
+
+        .resume-btn{
+            background:#2563eb;
+            color:white;
+            padding:11px 18px;
+            border-radius:8px;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .resume-btn:hover{
+            background:#1d4ed8;
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .button-row{
+            margin-top:30px;
+        }
+
+        .back-btn{
+            display:inline-block;
+            background:#0F4C81;
+            color:white;
+            padding:12px 22px;
+            text-decoration:none;
+            border-radius:8px;
+            font-weight:600;
+        }
+
+        .back-btn:hover{
+            background:#08365b;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:850px){
+
+            .sidebar{
+                position:relative;
+                width:100%;
+                height:auto;
+            }
+
+            .main{
+                margin-left:0;
+                padding:20px;
+            }
+
+            .profile-header{
+                flex-direction:column;
+                text-align:center;
+            }
+
+            .profile-grid{
+                grid-template-columns:1fr;
+            }
+
+            .card.full{
+                grid-column:auto;
+            }
+
+        }
+
+        @media(max-width:600px){
+
+            .info-grid{
+                grid-template-columns:1fr;
+            }
+
+            .resume-box{
+                flex-direction:column;
+                align-items:flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+    <h2>HR Panel</h2>
+
+    <a href="{{ url_for('hr_dashboard') }}">
+        🏠 Dashboard
+    </a>
+
+    <a href="{{ url_for('post_job') }}">
+        ➕ Post Job
+    </a>
+
+    <a href="{{ url_for('manage_jobs') }}">
+        📄 Manage Jobs
+    </a>
+
+    <a href="{{ url_for('applicants') }}">
+        👥 Applicants
+    </a>
+
+    <a href="{{ url_for('shortlisted') }}">
+        📨 Shortlisted
+    </a>
+
+    <a href="{{ url_for('hr_profile') }}">
+    👤 My Profile
+</a>
+
+    <a href="{{ url_for('logout') }}">
+        🚪 Logout
+    </a>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+    <h1 class="page-title">
+        Candidate Profile
+    </h1>
+
+
+    <!-- ================= PROFILE HEADER ================= -->
+
+    <div class="profile-header">
+
+        {% if candidate.profile_pic %}
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='uploads/profile_pics/' + candidate.profile_pic
+                ) }}"
+                class="profile-photo"
+                alt="Profile Photo"
+            >
+
+        {% else %}
+
+            <div class="profile-placeholder">
+
+                {% if candidate.name %}
+
+                    {{ candidate.name[0]|upper }}
+
+                {% else %}
+
+                    👤
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="profile-info">
+
+            <h1>
+                {{ candidate.name or "Candidate" }}
+            </h1>
+
+            <p>
+                📧 {{ candidate.email or "Not Available" }}
+            </p>
+
+            <p>
+                📱 {{ candidate.mobile or "Not Available" }}
+            </p>
+
+            <p>
+                📍 {{ candidate.location or "Location Not Available" }}
+            </p>
+
+            <span class="status">
+                ● Candidate Profile
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PROFILE DETAILS ================= -->
+
+    <div class="profile-grid">
+
+
+        <!-- PERSONAL INFORMATION -->
+
+        <div class="card full">
+
+            <div class="card-header">
+
+                <div class="card-title">
+                    👤 Personal Information
+                </div>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div class="info-item">
+
+                    <label>Full Name</label>
+
+                    <p>
+                        {{ candidate.name or "Not Available" }}
+                    </p>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>Email Address</label>
+
+                    <p>
+                        {{ candidate.email or "Not Available" }}
+                    </p>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>Mobile Number</label>
+
+                    <p>
+                        {{ candidate.mobile or "Not Available" }}
+                    </p>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>Location</label>
+
+                    <p>
+                        {{ candidate.location or "Not Available" }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EDUCATION -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="card-title">
+                    🎓 Education
+                </div>
+
+            </div>
+
+            <div class="info-item">
+
+                <label>Highest Qualification</label>
+
+                <p>
+                    {{ candidate.education or "Not Available" }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="card-title">
+                    💼 Experience
+                </div>
+
+            </div>
+
+            <div class="info-item">
+
+                <label>Experience Level</label>
+
+                <p>
+                    {{ candidate.experience or "Not Available" }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div class="card full">
+
+            <div class="card-header">
+
+                <div class="card-title">
+                    🛠️ Professional Skills
+                </div>
+
+            </div>
+
+
+            {% if candidate.skills %}
+
+                <div class="skills-container">
+
+                    {% for skill in candidate.skills.split(',') %}
+
+                        {% if skill.strip() %}
+
+                            <span class="skill">
+
+                                {{ skill.strip() }}
+
+                            </span>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p style="color:#667085;">
+                    No skills added.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- RESUME -->
+
+        <div class="card full">
+
+            <div class="card-header">
+
+                <div class="card-title">
+                    📄 Resume
+                </div>
+
+            </div>
+
+
+            {% if candidate.resume %}
+
+                <div class="resume-box">
+
+                    <div>
+
+                        <div class="resume-name">
+
+                            📄 {{ candidate.resume }}
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for(
+                            'static',
+                            filename='uploads/resumes/' + candidate.resume
+                        ) }}"
+                        target="_blank"
+                        class="resume-btn"
+                    >
+
+                        View Resume
+
+                    </a>
+
+                </div>
+
+            {% else %}
+
+                <p style="color:#667085;">
+                    No resume uploaded.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= BACK ================= -->
+
+    <div class="button-row">
+
+        <a
+            href="{{ url_for('applicants') }}"
+            class="back-btn"
+        >
+
+            ← Back to Applicants
+
+        </a>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="../static/css/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<title>Recruitment Website</title>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        <h2>TalentBridge</h2>
+    </div>
+
+
+    <nav>
+
+        <ul>
+
+            <li>
+                <a href="/about">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('jobs') }}">
+                    Jobs
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('fields') }}">
+                    Fields
+                </a>
+            </li>
+
+            <li>
+                <a href="/salary-guide">Salary Guide</a>
+            </li>
+
+            
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================
+         NAVIGATION BUTTONS
+    ========================= -->
+
+    <div class="nav-buttons">
+
+        <a
+            href="{{ url_for('candidate_login') }}"
+            class="login-btn"
+        >
+            Candidate Login
+        </a>
+
+
+        <a
+            href="{{ url_for('candidate_register') }}"
+            class="register-btn"
+        >
+            Candidate Register
+        </a>
+
+
+        <a
+            href="{{ url_for('hr_login') }}"
+            class="login-btn"
+        >
+            HR Login
+        </a>
+
+
+        <a
+            href="{{ url_for('hr_register') }}"
+            class="login-btn"
+        >
+            HR Register
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_login') }}"
+            class="top-btn"
+        >
+            Admin
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     HERO SECTION
+========================= -->
+
+<section class="hero">
+
+
+    <!-- LEFT SIDE -->
+
+    <div class="left">
+
+        <h1>
+            Hire Smarter.<br>
+            Work Better.<br>
+            Grow Faster.
+        </h1>
+
+
+        <p>
+            We are professionals that can easily deal with
+            any your hiring needs.
+        </p>
+
+
+        <a href="#" class="btn">
+            Hire Talent
+        </a>
+
+    </div>
+
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="right">
+
+        <div class="image-box">
+
+
+            <img
+                src="../static/images/image.png"
+                alt="TalentBridge Recruitment"
+            >
+
+
+            <!-- =========================
+                 STATISTICS
+            ========================= -->
+
+            <div class="stats">
+
+
+                <div class="card green">
+
+                    <h3>
+                        Recruit
+                    </h3>
+
+                    <p>
+                        on average to close a vacancy
+                    </p>
+
+                </div>
+
+
+
+                <div class="card blue">
+
+                    <h3>
+                        Connect
+                    </h3>
+
+                    <p>
+                        positive reviews
+                    </p>
+
+                </div>
+
+
+
+                <div class="card dark">
+
+                    <h3>
+                        Succeed
+                    </h3>
+
+                    <p>
+                        people placed in top companies
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>

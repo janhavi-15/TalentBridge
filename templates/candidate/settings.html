@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Settings</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#eef2f7;
+}
+
+.container{
+
+width:600px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+h1{
+
+text-align:center;
+color:#0F4C81;
+margin-bottom:30px;
+
+}
+
+.input-box{
+
+margin-bottom:20px;
+
+}
+
+label{
+
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+
+}
+
+input{
+
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+
+}
+
+button{
+
+width:100%;
+padding:14px;
+background:#0F4C81;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#08365b;
+
+}
+
+.logout{
+
+display:block;
+margin-top:20px;
+text-align:center;
+background:#dc2626;
+color:white;
+padding:14px;
+border-radius:8px;
+text-decoration:none;
+
+}
+
+.logout:hover{
+
+background:#b91c1c;
+
+}
+
+
+
+
+.message{
+    background:#d4edda;
+    color:#155724;
+    padding:12px;
+    margin-bottom:20px;
+    border-radius:8px;
+    text-align:center;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Candidate Settings</h1>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="message">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="input-box">
+
+<label>Email</label>
+
+<input
+type="email"
+name="email"
+value="{{ user.email }}"
+required>
+
+</div>
+
+<div class="input-box">
+
+<label>Mobile</label>
+
+<input
+type="text"
+name="mobile"
+value="{{ user.mobile }}"
+required>
+
+</div>
+
+<hr><br>
+
+<h3>Change Password</h3>
+
+<br>
+
+<div class="input-box">
+
+<label>Old Password</label>
+
+<input
+type="password"
+name="old_password">
+
+</div>
+
+<div class="input-box">
+
+<label>New Password</label>
+
+<input
+type="password"
+name="new_password">
+
+</div>
+
+<div class="input-box">
+
+<label>Confirm Password</label>
+
+<input
+type="password"
+name="confirm_password">
+
+</div>
+<div class="input-box">
+
+<label>Replace Resume (PDF)</label>
+
+<input
+type="file"
+name="resume"
+accept=".pdf">
+
+{% if user.resume %}
+<br><br>
+<a href="{{ url_for('static',
+filename='uploads/resumes/' + user.resume) }}"
+target="_blank">
+📄 Current Resume
+</a>
+{% endif %}
+
+</div>
+
+<button type="submit">
+
+Save Changes
+
+</button>
+
+</form>
+
+<a href="{{ url_for('logout') }}" class="logout">
+
+Logout
+
+</a>
+
+</div>
+<script>
+setTimeout(function () {
+    const msg = document.querySelector(".message");
+
+    if (msg) {
+        msg.style.transition = "opacity 0.5s";
+        msg.style.opacity = "0";
+
+        setTimeout(function () {
+            msg.remove();
+        }, 500);
+    }
+}, 3000);
+</script>
+
+</body>
+
+</html>

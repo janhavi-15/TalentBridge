@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jobs - TalentBridge</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f5f9fc;
+            color: #14213d;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            width: 100%;
+            height: 90px;
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 50px;
+
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        /* LOGO */
+
+        .logo h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+
+        /* NAVIGATION */
+
+        nav ul {
+            list-style: none;
+
+            display: flex;
+            align-items: center;
+
+            gap: 38px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+
+            color: #111827;
+
+            font-size: 16px;
+            font-weight: 500;
+
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #16a34a;
+        }
+
+
+        /* =========================
+           JOBS PAGE
+        ========================= */
+
+        .jobs-page {
+            max-width: 1250px;
+
+            margin: 0 auto;
+
+            padding: 60px 30px 80px;
+        }
+
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .jobs-header {
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .jobs-header h1 {
+            font-size: 42px;
+
+            color: #0f4c81;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+        }
+
+        .jobs-header p {
+            color: #64748b;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           JOB GRID
+        ========================= */
+
+        .jobs-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* =========================
+           JOB CARD
+        ========================= */
+
+        .job-card {
+
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            padding: 28px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 5px 20px rgba(15, 76, 129, 0.08);
+
+            transition: 0.3s;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .job-card:hover {
+
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 12px 30px rgba(15, 76, 129, 0.15);
+        }
+
+
+        /* TOP GREEN LINE */
+
+        .job-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 5px;
+
+            background: #22c55e;
+        }
+
+
+        /* JOB ICON */
+
+        .job-icon {
+
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #ecfdf5;
+
+            border-radius: 12px;
+
+            font-size: 25px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* JOB TITLE */
+
+        .job-card h2 {
+
+            font-size: 22px;
+
+            color: #0f4c81;
+
+            margin-bottom: 14px;
+
+            text-transform: capitalize;
+        }
+
+
+        /* COMPANY */
+
+        .job-card .company {
+
+            font-weight: 600;
+
+            color: #334155;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* JOB DETAILS */
+
+        .job-card p {
+
+            font-size: 14px;
+
+            color: #64748b;
+
+            line-height: 1.6;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* DESCRIPTION */
+
+        .job-card .description {
+
+            margin-top: 15px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #e5e7eb;
+
+            min-height: 65px;
+
+            color: #475569;
+        }
+
+
+        /* =========================
+           APPLY BUTTON
+        ========================= */
+
+        .apply-btn {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            width: 100%;
+
+            text-align: center;
+
+            padding: 12px 18px;
+
+            background: #16a34a;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .apply-btn:hover {
+
+            background: #15803d;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           NO JOBS
+        ========================= */
+
+        .no-jobs {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 70px 30px;
+
+            text-align: center;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .no-jobs h2 {
+
+            color: #0f4c81;
+
+            margin-bottom: 10px;
+
+            font-size: 25px;
+        }
+
+        .no-jobs p {
+
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            header {
+
+                padding: 0 25px;
+            }
+
+            nav ul {
+
+                gap: 20px;
+            }
+
+            .jobs-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            header {
+
+                height: auto;
+
+                padding: 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .logo h2 {
+
+                font-size: 27px;
+            }
+
+            nav ul {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+            .jobs-page {
+
+                padding: 40px 20px;
+            }
+
+            .jobs-header h1 {
+
+                font-size: 32px;
+            }
+
+            .jobs-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+
+
+
+
+
+        .match-score {
+    margin: 12px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #e8f5e9;
+    color: #1b5e20;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 3px;
+    border-radius: 5px;
+    background: #f1f1f1;
+    font-size: 13px;
+}
+
+.skills {
+    margin-top: 8px;
+}
+
+
+
+
+
+.match-score {
+    margin: 12px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #e8f5e9;
+    color: #1b5e20;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        <h2>TalentBridge</h2>
+
+    </div>
+
+
+    <nav>
+
+        <ul>
+
+            <li>
+                <a href="{{ url_for('home') }}">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('jobs') }}">
+                    Jobs
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('candidate_login') }}">
+                    Candidate Login
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('hr_login') }}">
+                    HR Login
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     JOBS
+========================= -->
+
+<section class="jobs-page">
+
+
+    <div class="jobs-header">
+
+        <h1>Available Jobs</h1>
+
+        <p>
+            Explore the latest opportunities posted by employers.
+        </p>
+
+    </div>
+
+
+
+    {% if jobs %}
+
+<div class="jobs-grid">
+
+    {% for job in jobs %}
+
+    <div class="job-card">
+
+        <!-- JOB ICON -->
+        <div class="job-icon">
+            💼
+        </div>
+
+
+        <!-- JOB TITLE -->
+        <h2>
+            {{ job.title }}
+        </h2>
+
+
+
+        
+
+{% if sort_by == "match" and match_scores %}
+
+    <div class="match-score">
+
+        🎯 Match Score:
+        <strong>
+            {{ "%.2f"|format(match_scores.get(job.id, 0)) }}%
+        </strong>
+
+    </div>
+
+{% endif %}
+
+
+        <!-- COMPANY -->
+        <p class="company">
+            🏢 {{ job.company }}
+        </p>
+
+
+        <!-- LOCATION -->
+        <p>
+            📍 {{ job.location }}
+        </p>
+
+
+        <!-- MATCH SCORE -->
+        {% if sort_by == "match" and match_scores and job.id in match_scores %}
+
+        <div class="match-score">
+
+            🎯
+            <strong>
+                Match Score:
+                {{ "%.2f"|format(match_scores[job.id]) }}%
+            </strong>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- SALARY -->
+        <p>
+            💰 {{ job.salary }}
+        </p>
+
+
+        <!-- JOB TYPE -->
+        <p>
+            💼 {{ job.job_type }}
+        </p>
+
+
+        <!-- WORK MODE -->
+        {% if job.work_mode %}
+
+        <p>
+            🏠 {{ job.work_mode }}
+        </p>
+
+        {% endif %}
+
+
+        <!-- EDUCATION -->
+        <p>
+            🎓 {{ job.education }}
+        </p>
+
+
+        <!-- EXPERIENCE -->
+        <p>
+            ⏳ {{ job.experience }}
+        </p>
+
+
+        <!-- JOB FIELD -->
+        {% if job.field %}
+
+        <p>
+            📂 <strong>{{ job.field }}</strong>
+        </p>
+
+        {% endif %}
+
+
+        <!-- SKILLS -->
+        {% if job.skills %}
+
+        <p class="skills">
+
+            {% for skill in job.skills.split(',') %}
+
+                <span class="skill-tag">
+                    {{ skill.strip() }}
+                </span>
+
+            {% endfor %}
+
+        </p>
+
+        {% endif %}
+
+
+        <!-- DESCRIPTION -->
+        <p class="description">
+            {{ job.description }}
+        </p>
+
+
+        <!-- APPLY BUTTON -->
+        <a
+            href="{{ url_for('candidate_login', job_id=job.id) }}"
+            class="apply-btn">
+
+            Apply Now
+
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="no-jobs">
+
+    <h3>
+        No jobs found
+    </h3>
+
+    <p>
+        Try changing your filters or search criteria.
+    </p>
+
+</div>
+
+{% endif %}
+
+
+</section>
+
+
+</body>
+
+</html>

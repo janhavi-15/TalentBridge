@@ -1,0 +1,11 @@
+@"
+config.py
+__pycache__/
+*.pyc
+instance/
+*.db
+*.sqlite
+*.sqlite3
+static/uploads/
+.env
+"@ | Out-File -FilePath .gitignore -Encoding utf8

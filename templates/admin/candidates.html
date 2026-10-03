@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Manage Candidates - TalentBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 260px;
+            padding: 35px;
+        }
+
+        h1 {
+            color: #0F4C81;
+            margin-bottom: 25px;
+            font-size: 32px;
+        }
+
+        /* ================= TABLE BOX ================= */
+
+        .table-box {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.08);
+            overflow-x: auto;
+        }
+
+        /* ================= TABLE ================= */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+        }
+
+        th {
+            background: #0F4C81;
+            color: white;
+            padding: 14px;
+            text-align: left;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #333;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        /* ================= DELETE BUTTON ================= */
+
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+            white-space: nowrap;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            font-size: 16px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:900px) {
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= ADMIN SIDEBAR ================= -->
+
+{% include "admin/sidebar.html" %}
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+    <h1>👨‍💼 Manage Candidates</h1>
+
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Mobile</th>
+
+                    <th>Education</th>
+
+                    <th>Skills</th>
+
+                    <th>Experience</th>
+
+                    <th>Location</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for candidate in candidates %}
+
+                <tr>
+
+                    <!-- ID -->
+
+                    <td>
+                        {{ candidate.id }}
+                    </td>
+
+
+                    <!-- NAME -->
+
+                    <td>
+                        <strong>
+                            {{ candidate.name or "Not Available" }}
+                        </strong>
+                    </td>
+
+
+                    <!-- EMAIL -->
+
+                    <td>
+                        {{ candidate.email or "Not Available" }}
+                    </td>
+
+
+                    <!-- MOBILE -->
+
+                    <td>
+                        {{ candidate.mobile or "Not Available" }}
+                    </td>
+
+
+                    <!-- EDUCATION -->
+
+                    <td>
+                        {{ candidate.education or "Not Available" }}
+                    </td>
+
+
+                    <!-- SKILLS -->
+
+                    <td>
+                        {{ candidate.skills or "Not Available" }}
+                    </td>
+
+
+                    <!-- EXPERIENCE -->
+
+                    <td>
+                        {{ candidate.experience or "Not Available" }}
+                    </td>
+
+
+                    <!-- LOCATION -->
+
+                    <td>
+                        {{ candidate.location or "Not Available" }}
+                    </td>
+
+
+                    <!-- ACTION -->
+
+                    <td>
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'delete_candidate',
+                                user_id=candidate.id
+                            ) }}"
+                            onsubmit="return confirm(
+                                'Are you sure you want to delete this candidate?'
+                            );"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete-btn"
+                            >
+                                🗑️ Delete
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="9" class="empty">
+
+                        No candidates registered yet.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

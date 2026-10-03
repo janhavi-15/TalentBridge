@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Registration</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body{
+            background:#f5f7fa;
+            font-family:Poppins,sans-serif;
+        }
+
+        .container{
+            width:450px;
+            margin:50px auto;
+            background:#fff;
+            padding:35px;
+            border-radius:12px;
+            box-shadow:0 0 20px rgba(0,0,0,.1);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+            color:#2c3e50;
+        }
+
+        .input-box{
+            margin-bottom:18px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:6px;
+            font-weight:500;
+        }
+
+        input,select{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:15px;
+        }
+
+        .btn{
+            width:100%;
+            padding:14px;
+            background:#27ae60;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:17px;
+            cursor:pointer;
+        }
+
+        .btn:hover{
+            background:#219150;
+        }
+
+        .login{
+            text-align:center;
+            margin-top:18px;
+        }
+
+        a{
+            text-decoration:none;
+            color:#27ae60;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Candidate Registration</h2>
+
+
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div style="
+                background:#d4edda;
+                color:#155724;
+                padding:12px;
+                border-radius:5px;
+                margin-bottom:15px;
+                text-align:center;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="input-box">
+<label>Full Name</label>
+<input type="text" name="name" required>
+</div>
+
+<div class="input-box">
+<label>Email</label>
+<input type="email" name="email" required>
+</div>
+
+<div class="input-box">
+<label>Mobile Number</label>
+<input type="text" name="mobile" required>
+</div>
+
+
+<div class="input-box">
+    <label>Location</label>
+    <input type="text" name="location" placeholder="e.g. Mumbai, Maharashtra">
+</div>
+
+
+<div class="input-box">
+<label>Education</label>
+<input type="text" name="education">
+</div>
+
+<div class="input-box">
+<label>Skills</label>
+<input type="text" name="skills">
+</div>
+
+<div class="input-box">
+<label>Experience</label>
+<select name="experience">
+<option>Fresher</option>
+<option>1 Year</option>
+<option>2 Years</option>
+<option>3+ Years</option>
+</select>
+</div>
+
+<div class="input-box">
+<label>Password</label>
+<input type="password" name="password" required>
+</div>
+
+<div class="input-box">
+<label>Confirm Password</label>
+<input type="password" name="confirm" required>
+</div>
+
+
+
+<div class="input-box">
+    <label>Upload Resume (PDF)</label>
+
+    <input
+        type="file"
+        name="resume"
+        accept=".pdf"
+        required>
+
+</div>
+
+
+
+<button type="submit" class="btn">
+    Register
+</button>
+
+<div class="login">
+Already have an account?
+<a href="{{ url_for('candidate_login') }}">Login</a>
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>

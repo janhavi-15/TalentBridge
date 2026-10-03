@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Career Fields - TalentBridge</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f5f9fc;
+            color: #14213d;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            width: 100%;
+            min-height: 90px;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 50px;
+
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo h2 {
+            font-size: 32px;
+            color: #111827;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+
+            display: flex;
+            align-items: center;
+
+            gap: 35px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+
+            color: #111827;
+
+            font-size: 16px;
+            font-weight: 500;
+
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #16a34a;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .fields-page {
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 65px 30px 80px;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .fields-header {
+            text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+        .fields-header h1 {
+            font-size: 42px;
+
+            color: #0f4c81;
+
+            margin-bottom: 12px;
+
+            font-weight: 700;
+        }
+
+        .fields-header p {
+            font-size: 17px;
+
+            color: #64748b;
+
+            max-width: 700px;
+
+            margin: auto;
+
+            line-height: 1.7;
+        }
+
+        /* =========================
+           FIELD GRID
+        ========================= */
+
+        .fields-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        /* =========================
+           FIELD CARD
+        ========================= */
+
+        .field-card {
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            box-shadow: 0 5px 20px rgba(15, 76, 129, 0.07);
+
+            transition: all 0.3s ease;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .field-card::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 4px;
+
+            background: #22c55e;
+        }
+
+        .field-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow: 0 12px 30px rgba(15, 76, 129, 0.14);
+
+            border-color: #cbd5e1;
+        }
+
+        /* =========================
+           ICON
+        ========================= */
+
+        .field-icon {
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #ecfdf5;
+
+            border-radius: 14px;
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .field-card h2 {
+            color: #0f4c81;
+
+            font-size: 20px;
+
+            margin-bottom: 10px;
+
+            font-weight: 600;
+        }
+
+        /* =========================
+           DESCRIPTION
+        ========================= */
+
+        .field-card p {
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           VIEW JOBS
+        ========================= */
+
+        .field-link {
+            color: #16a34a;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            background: white;
+
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            header {
+                padding: 0 25px;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            .fields-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                height: auto;
+
+                padding: 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+            .fields-page {
+                padding: 45px 20px;
+            }
+
+            .fields-header h1 {
+                font-size: 32px;
+            }
+
+            .fields-header p {
+                font-size: 15px;
+            }
+
+            .fields-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        <h2>TalentBridge</h2>
+    </div>
+
+
+    <nav>
+
+        <ul>
+
+            <li>
+                <a href="{{ url_for('home') }}">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('jobs') }}">
+                    Jobs
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('fields') }}">
+                    Fields
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('candidate_login') }}">
+                    Candidate Login
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('hr_login') }}">
+                    HR Login
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     FIELDS PAGE
+========================= -->
+
+<section class="fields-page">
+
+
+    <div class="fields-header">
+
+        <h1>
+            Explore Career Fields
+        </h1>
+
+        <p>
+            Discover opportunities across different industries
+            and find the career field that matches your skills,
+            interests, and goals.
+        </p>
+
+    </div>
+
+
+    <div class="fields-grid">
+
+
+        <!-- =========================
+             IT & SOFTWARE
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='IT & Software') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                💻
+            </div>
+
+            <h2>
+                IT & Software
+            </h2>
+
+            <p>
+                Explore software development, web development,
+                application development, backend development,
+                frontend development, and technology careers.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             DATA & ANALYTICS
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Data & Analytics') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                📊
+            </div>
+
+            <h2>
+                Data & Analytics
+            </h2>
+
+            <p>
+                Find opportunities in data analysis, business
+                intelligence, data science, reporting,
+                dashboards, and data-driven decision making.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             FINANCE
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Finance') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                💰
+            </div>
+
+            <h2>
+                Finance
+            </h2>
+
+            <p>
+                Explore accounting, banking, financial services,
+                taxation, bookkeeping, investment, and
+                finance-related careers.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             MARKETING
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Marketing') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                📣
+            </div>
+
+            <h2>
+                Marketing
+            </h2>
+
+            <p>
+                Discover digital marketing, social media,
+                advertising, branding, content marketing,
+                and marketing careers.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             HUMAN RESOURCES
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Human Resources') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                👥
+            </div>
+
+            <h2>
+                Human Resources
+            </h2>
+
+            <p>
+                Find careers in recruitment, talent acquisition,
+                employee relations, payroll, training,
+                and HR operations.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             HEALTHCARE
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Healthcare') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                🏥
+            </div>
+
+            <h2>
+                Healthcare
+            </h2>
+
+            <p>
+                Explore opportunities in nursing, medical services,
+                healthcare administration, clinical support,
+                and healthcare operations.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             ENGINEERING
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Engineering') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                ⚙️
+            </div>
+
+            <h2>
+                Engineering
+            </h2>
+
+            <p>
+                Discover engineering careers across civil,
+                mechanical, electrical, manufacturing,
+                and other technical disciplines.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             DESIGN & CREATIVE
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Design & Creative') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                🎨
+            </div>
+
+            <h2>
+                Design & Creative
+            </h2>
+
+            <p>
+                Explore graphic design, UI/UX design,
+                visual communication, animation,
+                content creation, and creative careers.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             SALES
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Sales') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                🛒
+            </div>
+
+            <h2>
+                Sales
+            </h2>
+
+            <p>
+                Find opportunities in sales, business development,
+                account management, customer acquisition,
+                and sales operations.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             LOGISTICS
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Logistics & Supply Chain') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                📦
+            </div>
+
+            <h2>
+                Logistics & Supply Chain
+            </h2>
+
+            <p>
+                Explore logistics, supply chain management,
+                transportation, warehouse operations,
+                inventory management, and shipment coordination.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             CUSTOMER SERVICE
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Customer Service') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                🎧
+            </div>
+
+            <h2>
+                Customer Service
+            </h2>
+
+            <p>
+                Discover customer support, client servicing,
+                helpdesk, customer relationship management,
+                and service management opportunities.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             EDUCATION
+        ========================= -->
+
+        <a href="{{ url_for('jobs', field='Education') }}"
+           class="field-card">
+
+            <div class="field-icon">
+                🎓
+            </div>
+
+            <h2>
+                Education
+            </h2>
+
+            <p>
+                Find teaching, training, academic,
+                instructional, tutoring, and
+                education-related careers.
+            </p>
+
+            <span class="field-link">
+                View Jobs →
+            </span>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+    TalentBridge • Connecting Talent With Opportunity
+
+</div>
+
+
+</body>
+
+</html>

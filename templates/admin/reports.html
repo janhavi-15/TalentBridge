@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Reports - TalentBridge</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* Main Content */
+
+        .main {
+            margin-left: 260px;
+            padding: 35px;
+        }
+
+        /* Page Header */
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 34px;
+            color: #0F4C81;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* Summary Cards */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #0F4C81;
+        }
+
+        .card-icon {
+            float: right;
+            font-size: 28px;
+        }
+
+        .card-title {
+            color: #6b7280;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .card-value {
+            font-size: 34px;
+            font-weight: bold;
+            color: #0F4C81;
+            margin-top: 10px;
+        }
+
+        /* Charts Section */
+
+        .charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .chart-box {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-box h2 {
+            color: #0F4C81;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 320px;
+        }
+
+        /* Full Width Chart */
+
+        .full-chart {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .full-chart h2 {
+            color: #0F4C81;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .overview-container {
+            position: relative;
+            height: 350px;
+        }
+
+        /* Report Table */
+
+        .report-table {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .report-table h2 {
+            color: #0F4C81;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #0F4C81;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 1100px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .charts {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Admin Sidebar -->
+
+    {% include "admin/sidebar.html" %}
+
+
+    <!-- Main Content -->
+
+    <div class="main">
+
+
+        <!-- Page Header -->
+
+        <div class="page-header">
+
+            <h1>📊 Reports & Analytics</h1>
+
+            <p>
+                TalentBridge recruitment platform overview
+            </p>
+
+        </div>
+
+
+        <!-- Summary Cards -->
+
+        <div class="cards">
+
+
+            <!-- Candidates -->
+
+            <div class="card">
+
+                <span class="card-icon">👨‍💼</span>
+
+                <div class="card-title">
+                    Total Candidates
+                </div>
+
+                <div class="card-value">
+                    {{ total_candidates }}
+                </div>
+
+            </div>
+
+
+            <!-- HR -->
+
+            <div class="card">
+
+                <span class="card-icon">🏢</span>
+
+                <div class="card-title">
+                    Total HR
+                </div>
+
+                <div class="card-value">
+                    {{ total_hr }}
+                </div>
+
+            </div>
+
+
+            <!-- Jobs -->
+
+            <div class="card">
+
+                <span class="card-icon">💼</span>
+
+                <div class="card-title">
+                    Total Jobs
+                </div>
+
+                <div class="card-value">
+                    {{ total_jobs }}
+                </div>
+
+            </div>
+
+
+            <!-- Applications -->
+
+            <div class="card">
+
+                <span class="card-icon">📄</span>
+
+                <div class="card-title">
+                    Total Applications
+                </div>
+
+                <div class="card-value">
+                    {{ total_applications }}
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Charts -->
+
+        <div class="charts">
+
+
+            <!-- User Distribution -->
+
+            <div class="chart-box">
+
+                <h2>👥 User Distribution</h2>
+
+                <div class="chart-container">
+
+                    <canvas id="userChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- Jobs and Applications -->
+
+            <div class="chart-box">
+
+                <h2>📊 Jobs & Applications</h2>
+
+                <div class="chart-container">
+
+                    <canvas id="jobChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Platform Overview -->
+
+        <div class="full-chart">
+
+            <h2>📈 Platform Overview</h2>
+
+            <div class="overview-container">
+
+                <canvas id="overviewChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- Recruitment Summary -->
+
+        <div class="report-table">
+
+            <h2>📋 Recruitment Summary</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Category</th>
+
+                        <th>Total</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>👨 Candidates</td>
+
+                        <td>
+                            {{ total_candidates }}
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>🏢 HR Users</td>
+
+                        <td>
+                            {{ total_hr }}
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>💼 Jobs</td>
+
+                        <td>
+                            {{ total_jobs }}
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Available
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>📄 Applications</td>
+
+                        <td>
+                            {{ total_applications }}
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Received
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT / CHARTS
+         ========================================== -->
+
+    <script>
+
+
+        /* ==========================================
+           1. USER DISTRIBUTION DOUGHNUT CHART
+           ========================================== */
+
+
+        const userCanvas = document.getElementById("userChart");
+
+
+        new Chart(userCanvas, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: [
+                    "Candidates",
+                    "HR"
+                ],
+
+                datasets: [
+
+                    {
+
+                        label: "Users",
+
+                        data: [
+                            {{ total_candidates }},
+                            {{ total_hr }}
+                        ],
+
+                        borderWidth: 2
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        position: "bottom"
+
+                    }
+
+                }
+
+            }
+
+        });
+
+
+        /* ==========================================
+           2. JOBS VS APPLICATIONS BAR CHART
+           ========================================== */
+
+
+        const jobCanvas = document.getElementById("jobChart");
+
+
+        new Chart(jobCanvas, {
+
+            type: "bar",
+
+            data: {
+
+                labels: [
+                    "Jobs",
+                    "Applications"
+                ],
+
+                datasets: [
+
+                    {
+
+                        label: "Total",
+
+                        data: [
+                            {{ total_jobs }},
+                            {{ total_applications }}
+                        ],
+
+                        borderWidth: 1
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            precision: 0
+
+                        }
+
+                    }
+
+                },
+
+                plugins: {
+
+                    legend: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        });
+
+
+        /* ==========================================
+           3. OVERALL PLATFORM BAR CHART
+           ========================================== */
+
+
+        const overviewCanvas =
+            document.getElementById("overviewChart");
+
+
+        new Chart(overviewCanvas, {
+
+            type: "bar",
+
+            data: {
+
+                labels: [
+                    "Candidates",
+                    "HR",
+                    "Jobs",
+                    "Applications"
+                ],
+
+                datasets: [
+
+                    {
+
+                        label: "TalentBridge Statistics",
+
+                        data: [
+                            {{ total_candidates }},
+                            {{ total_hr }},
+                            {{ total_jobs }},
+                            {{ total_applications }}
+                        ],
+
+                        borderWidth: 1
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            precision: 0
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

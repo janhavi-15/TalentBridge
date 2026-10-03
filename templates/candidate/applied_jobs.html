@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Applied Jobs</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+display:flex;
+background:#f5f6fa;
+}
+
+.sidebar{
+width:250px;
+height:100vh;
+background:#1f2937;
+position:fixed;
+color:white;
+}
+
+.logo{
+padding:25px;
+font-size:28px;
+font-weight:bold;
+background:#111827;
+text-align:center;
+}
+
+.sidebar a{
+display:block;
+padding:16px 25px;
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+.sidebar a:hover{
+background:#27ae60;
+padding-left:35px;
+}
+
+.main{
+margin-left:250px;
+padding:30px;
+width:100%;
+}
+
+h1{
+margin-bottom:25px;
+color:#1f2937;
+}
+
+table{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+th{
+background:#27ae60;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+tr:hover{
+background:#f7f7f7;
+}
+
+.status{
+padding:6px 12px;
+border-radius:20px;
+font-weight:bold;
+color:white;
+}
+
+.Applied{
+background:#3498db;
+}
+
+.Shortlisted{
+background:#16a34a;
+}
+
+.Rejected{
+background:#dc2626;
+}
+
+
+.delete-btn{
+
+background:#dc2626;
+color:white;
+padding:8px 15px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
+margin-left:8px;
+
+}
+
+.delete-btn:hover{
+
+background:#b91c1c;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+TalentBridge
+</div>
+
+<a href="{{ url_for('candidate_dashboard') }}">🏠 Dashboard</a>
+<a href="{{ url_for('candidate_profile') }}">👤 My Profile</a>
+<a href="{{ url_for('candidate_jobs') }}">🔍 Browse Jobs</a>
+<a href="{{ url_for('applied_jobs') }}">📄 Applied Jobs</a>
+<a href="{{ url_for('saved_jobs') }}">❤️ Saved Jobs</a>
+<a href="{{ url_for('resume') }}">📄 Resume</a>
+<a href="{{ url_for('notifications') }}">🔔 Notifications</a>
+<a href="{{ url_for('settings') }}">⚙ Settings</a>
+<a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>Applied Jobs</h1>
+
+<table>
+
+<tr>
+<th>Company</th>
+<th>Job Title</th>
+<th>Location</th>
+<th>Status</th>
+<th>Applied Date</th>
+<th colspan="2">Action</th>
+</tr>
+
+{% for application, job in applications %}
+
+<tr>
+
+<td>{{ job.company }}</td>
+
+<td>{{ job.title }}</td>
+
+<td>{{ job.location }}</td>
+
+<td>
+
+<span class="status {{ application.status }}">
+{{ application.status }}
+</span>
+
+</td>
+
+<td>{{ application.applied_date.strftime("%d-%m-%Y") }}</td>
+
+
+
+
+<td>
+    <a href="{{ url_for('job_details', job_id=job.id) }}" class="details-btn">
+        Details
+    </a>
+
+    <a href="{{ url_for('delete_application', application_id=application.id) }}"
+       class="delete-btn"
+       onclick="return confirm('Remove this application?')">
+        Delete
+    </a>
+</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

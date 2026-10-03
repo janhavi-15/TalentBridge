@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>Saved Jobs</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+display:flex;
+background:#f5f6fa;
+}
+
+.sidebar{
+width:250px;
+height:100vh;
+background:#1f2937;
+position:fixed;
+color:white;
+}
+
+.logo{
+padding:25px;
+background:#111827;
+font-size:28px;
+font-weight:bold;
+text-align:center;
+}
+
+.sidebar a{
+display:block;
+padding:16px 25px;
+text-decoration:none;
+color:white;
+transition:.3s;
+}
+
+.sidebar a:hover{
+background:#27ae60;
+padding-left:35px;
+}
+
+.main{
+margin-left:250px;
+padding:30px;
+width:100%;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.card h2{
+color:#1f2937;
+margin-bottom:10px;
+}
+
+.card p{
+margin:8px 0;
+color:#555;
+}
+
+.btn{
+display:inline-block;
+margin-top:15px;
+padding:10px 20px;
+background:#27ae60;
+color:white;
+text-decoration:none;
+border-radius:8px;
+}
+
+.btn:hover{
+background:#1e8449;
+}
+
+
+
+.delete-btn{
+
+display:inline-block;
+margin-top:15px;
+margin-left:10px;
+padding:10px 20px;
+background:#dc2626;
+color:white;
+text-decoration:none;
+border-radius:8px;
+
+}
+
+.delete-btn:hover{
+
+background:#b91c1c;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+TalentBridge
+</div>
+
+<a href="{{ url_for('candidate_dashboard') }}">🏠 Dashboard</a>
+<a href="{{ url_for('candidate_profile') }}">👤 My Profile</a>
+<a href="{{ url_for('candidate_jobs') }}">🔍 Browse Jobs</a>
+<a href="{{ url_for('applied_jobs') }}">📄 Applied Jobs</a>
+<a href="{{ url_for('saved_jobs') }}">❤️ Saved Jobs</a>
+<a href="{{ url_for('resume') }}">📄 Resume</a>
+<a href="{{ url_for('notifications') }}">🔔 Notifications</a>
+<a href="{{ url_for('settings') }}">⚙ Settings</a>
+<a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>Saved Jobs</h1>
+
+<br>
+
+<div class="cards">
+
+{% for saved in saved_jobs %}
+
+<div class="card">
+
+<h2>{{ saved.job.title }}</h2>
+
+<p><b>Company:</b> {{ saved.job.company }}</p>
+
+<p><b>Location:</b> {{ saved.job.location }}</p>
+
+<p><b>Salary:</b> ₹{{ saved.job.salary }}</p>
+
+<p><b>Experience:</b> {{ saved.job.experience }}</p>
+
+<div style="margin-top:20px;">
+
+<a href="{{ url_for('job_details', job_id=saved.job.id) }}" class="btn">
+View Details
+</a>
+
+<a href="{{ url_for('delete_saved_job', saved_id=saved.id) }}"
+class="delete-btn"
+onclick="return confirm('Remove this saved job?')">
+Delete
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</body>
+</html>

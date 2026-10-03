@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Jobs - TalentBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #eef2f7;
+            color: #333;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            background: linear-gradient(
+                180deg,
+                #0f4c81,
+                #1565c0
+            );
+
+            color: white;
+
+            overflow-y: auto;
+
+            z-index: 1000;
+        }
+
+
+        .logo {
+            padding: 25px;
+
+            text-align: center;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.2);
+        }
+
+
+        .logo h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+
+        .logo p {
+            font-size: 13px;
+            opacity: .8;
+        }
+
+
+        .sidebar a {
+            display: block;
+
+            padding: 15px 25px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+            transition: .3s;
+        }
+
+
+        .sidebar a:hover {
+            background:
+                rgba(255,255,255,.15);
+
+            padding-left: 35px;
+        }
+
+
+        /* =====================================================
+           MAIN CONTENT
+        ===================================================== */
+
+        .main {
+            margin-left: 250px;
+
+            padding: 35px;
+        }
+
+
+        /* =====================================================
+           TOP HEADER
+        ===================================================== */
+
+        .top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .top h1 {
+            color: #0f4c81;
+
+            font-size: 32px;
+        }
+
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        .btn {
+            background: #16a34a;
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            border: none;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+
+        .btn:hover {
+            background: #15803d;
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        .search {
+            margin: 25px 0;
+        }
+
+
+        .search form {
+            display: flex;
+
+            gap: 10px;
+
+            align-items: center;
+        }
+
+
+        .search input {
+            width: 350px;
+
+            padding: 12px 15px;
+
+            border-radius: 8px;
+
+            border: 1px solid #ccc;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        .search input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,.1);
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats {
+            display: flex;
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .stat {
+            flex: 1;
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,.08);
+
+            text-align: center;
+        }
+
+
+        .stat h2 {
+            color: #0f4c81;
+
+            font-size: 28px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .stat p {
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           JOB GRID
+        ===================================================== */
+
+        .jobs {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(380px, 1fr));
+
+            gap: 25px;
+        }
+
+
+        /* =====================================================
+           JOB CARD
+        ===================================================== */
+
+        .card {
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,.10);
+
+            transition: .3s;
+        }
+
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,.14);
+        }
+
+
+        /* =====================================================
+           JOB TITLE
+        ===================================================== */
+
+        .title {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .title h2 {
+            color: #0f4c81;
+
+            font-size: 22px;
+
+            line-height: 1.3;
+        }
+
+
+        .active {
+            background: #dcfce7;
+
+            color: #15803d;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           JOB INFORMATION
+        ===================================================== */
+
+        .info {
+            margin: 11px 0;
+
+            color: #555;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+
+        .info b {
+            color: #222;
+        }
+
+
+        /* =====================================================
+           SKILLS
+        ===================================================== */
+
+        .skills {
+            margin-top: 15px;
+
+            padding-top: 10px;
+        }
+
+
+        .tag {
+            display: inline-block;
+
+            background: #e0f2fe;
+
+            color: #0369a1;
+
+            padding: 6px 12px;
+
+            margin: 4px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .actions {
+            margin-top: 22px;
+
+            display: flex;
+
+            gap: 10px;
+
+            align-items: stretch;
+        }
+
+
+        .actions a,
+        .actions form {
+            flex: 1;
+        }
+
+
+        .actions a,
+        .actions button {
+            width: 100%;
+
+            height: 45px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: .3s;
+        }
+
+
+        .view {
+            background: #6b7280;
+
+            color: white;
+        }
+
+
+        .update {
+            background: #2563eb;
+
+            color: white;
+        }
+
+
+        .delete {
+            background: #dc2626;
+
+            color: white;
+        }
+
+
+        .view:hover {
+            background: #4b5563;
+        }
+
+
+        .update:hover {
+            background: #1d4ed8;
+        }
+
+
+        .delete:hover {
+            background: #b91c1c;
+        }
+
+
+        /* =====================================================
+           EMPTY JOB MESSAGE
+        ===================================================== */
+
+        .empty {
+            background: white;
+
+            padding: 50px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,.08);
+        }
+
+
+        .empty h2 {
+            color: #0f4c81;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* =====================================================
+           JOB VIEW MODAL
+        ===================================================== */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            z-index: 9999;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background:
+                rgba(0,0,0,.6);
+
+            overflow-y: auto;
+
+            padding: 40px 20px;
+        }
+
+
+        .modal-content {
+            background: white;
+
+            max-width: 900px;
+
+            margin: auto;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            position: relative;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,.3);
+        }
+
+
+        .close {
+            position: absolute;
+
+            right: 25px;
+            top: 15px;
+
+            font-size: 35px;
+
+            color: #777;
+
+            cursor: pointer;
+
+            line-height: 1;
+        }
+
+
+        .close:hover {
+            color: #dc3545;
+        }
+
+
+        .modal-content h2 {
+            color: #1e3c72;
+
+            margin-bottom: 10px;
+
+            font-size: 30px;
+
+            padding-right: 40px;
+        }
+
+
+        .modal-status {
+            display: inline-block;
+
+            padding: 7px 15px;
+
+            border-radius: 20px;
+
+            background: #d4f8df;
+
+            color: #16843b;
+
+            font-weight: bold;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           MODAL DETAIL GRID
+        ===================================================== */
+
+        .detail-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .detail-grid > div {
+            background: #f5f7fa;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            border-left:
+                4px solid #2a5298;
+        }
+
+
+        .detail-grid strong {
+            display: block;
+
+            color: #555;
+
+            margin-bottom: 6px;
+        }
+
+
+        .detail-grid span {
+            color: #222;
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           MODAL SECTIONS
+        ===================================================== */
+
+        .modal-section {
+            margin-top: 25px;
+        }
+
+
+        .modal-section h3 {
+            color: #1e3c72;
+
+            margin-bottom: 10px;
+        }
+
+
+        .modal-section p {
+            background: #f5f7fa;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            line-height: 1.6;
+
+            white-space: pre-line;
+        }
+
+
+        /* =====================================================
+           GPS
+        ===================================================== */
+
+        .gps-box {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .gps-item {
+            background: #f5f7fa;
+
+            padding: 15px;
+
+            border-radius: 8px;
+        }
+
+
+        .gps-item strong {
+            display: block;
+
+            color: #555;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width: 900px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+
+                padding: 25px;
+            }
+
+            .jobs {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media(max-width: 700px) {
+
+            .sidebar {
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+            }
+
+
+            .main {
+                margin-left: 0;
+
+                padding: 20px;
+            }
+
+
+            .top {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+
+            .stats {
+                flex-direction: column;
+            }
+
+
+            .search form {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+
+            .search input {
+                width: 100%;
+            }
+
+
+            .actions {
+                flex-direction: column;
+            }
+
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .gps-box {
+                grid-template-columns: 1fr;
+            }
+
+
+            .modal-content {
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <h2>TalentBridge</h2>
+
+        <p>HR Panel</p>
+
+    </div>
+
+
+    <a href="{{ url_for('hr_dashboard') }}">
+        🏠 Dashboard
+    </a>
+
+
+    <a href="{{ url_for('post_job') }}">
+        ➕ Post Job
+    </a>
+
+
+    <a href="{{ url_for('manage_jobs') }}">
+        💼 Manage Jobs
+    </a>
+
+
+    <a href="{{ url_for('applicants') }}">
+        👥 Applicants
+    </a>
+
+
+    <a href="{{ url_for('shortlisted') }}">
+        ⭐ Shortlisted
+    </a>
+
+
+    <a href="{{ url_for('hr_settings') }}">
+        ⚙️ Settings
+    </a>
+
+    <a href="{{ url_for('hr_profile') }}">
+    👤 My Profile
+</a>
+
+
+    <a href="{{ url_for('logout') }}">
+        🚪 Logout
+    </a>
+
+</div>
+
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<div class="main">
+
+
+    <!-- TOP HEADER -->
+
+    <div class="top">
+
+        <h1>
+            Manage Jobs
+        </h1>
+
+
+        <a
+            href="{{ url_for('post_job') }}"
+            class="btn">
+
+            + Post New Job
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         STATISTICS
+    ===================================================== -->
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <h2>
+                {{ jobs|length }}
+            </h2>
+
+            <p>
+                Total Jobs
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>
+                {{ jobs|length }}
+            </h2>
+
+            <p>
+                Active Jobs
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>
+                {{ total_applications }}
+            </h2>
+
+            <p>
+                Total Applications
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SEARCH
+    ===================================================== -->
+
+    <div class="search">
+
+        <form
+            method="GET"
+            action="{{ url_for('manage_jobs') }}">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="🔍 Search Job"
+                value="{{ request.args.get('search','') }}">
+
+
+            <button
+                class="btn"
+                type="submit">
+
+                Search
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JOB CARDS
+    ===================================================== -->
+
+    <div class="jobs">
+
+
+        {% if jobs %}
+
+
+            {% for job in jobs %}
+
+
+            <div class="card">
+
+
+                <!-- JOB TITLE -->
+
+                <div class="title">
+
+                    <h2>
+                        {{ job.title }}
+                    </h2>
+
+
+                    <span class="active">
+                        Active
+                    </span>
+
+                </div>
+
+
+
+                <!-- COMPANY -->
+
+                <div class="info">
+
+                    🏢
+                    <b>
+                        {{ job.company }}
+                    </b>
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="info">
+
+                    📍
+                    {{ job.location or "Not specified" }}
+
+                </div>
+
+
+
+                <!-- SALARY -->
+
+                <div class="info">
+
+                    💰
+                    ₹{{ job.salary or "Not specified" }}
+
+                </div>
+
+
+
+                <!-- VACANCIES -->
+
+                <div class="info">
+
+                    👥
+                    {{ job.vacancies or "Not specified" }}
+                    Vacancies
+
+                </div>
+
+
+
+                <!-- JOB TYPE -->
+
+                <div class="info">
+
+                    💼
+                    {{ job.job_type or "Not specified" }}
+
+                </div>
+
+
+
+                <!-- EXPERIENCE -->
+
+                <div class="info">
+
+                    ⏳
+                    {{ job.experience or "Not specified" }}
+
+                </div>
+
+
+
+                <!-- DEADLINE -->
+
+                <div class="info">
+
+                    📅
+                    Apply Before:
+                    {{ job.deadline or "Not specified" }}
+
+                </div>
+
+
+
+                <!-- FIELD -->
+
+                {% if job.field %}
+
+                <div class="info">
+
+                    📂
+                    <b>Field:</b>
+                    {{ job.field }}
+
+                </div>
+
+                {% endif %}
+
+
+
+                <!-- SKILLS -->
+
+                <div class="skills">
+
+
+                    {% if job.skills %}
+
+
+                        {% for skill in job.skills.split(',') %}
+
+                            <span class="tag">
+                                {{ skill.strip() }}
+                            </span>
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+                        <span class="tag">
+                            No skills specified
+                        </span>
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACTION BUTTONS
+                ================================================= -->
+
+                <div class="actions">
+
+
+                    <!-- VIEW -->
+
+                    <button
+                        type="button"
+                        class="view view-btn"
+                        data-job-id="{{ job.id }}">
+
+                        👁 View
+
+                    </button>
+
+
+
+                    <!-- UPDATE -->
+
+                    <a
+                        class="update"
+                        href="{{ url_for('edit_job', job_id=job.id) }}">
+
+                        ✏️ Update
+
+                    </a>
+
+
+
+                    <!-- DELETE -->
+
+                    <!-- IMPORTANT:
+                         Your Flask endpoint is delete_job,
+                         NOT hr_delete_job.
+                    -->
+
+                    <form
+                        action="{{ url_for('delete_job', job_id=job.id) }}"
+                        method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this job?');">
+
+                        <button
+                            type="submit"
+                            class="delete">
+
+                            🗑️ Delete
+
+                        </button>
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty">
+
+                <h2>
+                    No Jobs Found
+                </h2>
+
+                <p>
+                    You have not posted any jobs yet.
+                </p>
+
+                <br>
+
+                <a
+                    href="{{ url_for('post_job') }}"
+                    class="btn">
+
+                    + Post Your First Job
+
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JOB VIEW MODAL
+========================================================= -->
+
+<div
+    id="jobModal"
+    class="modal">
+
+
+    <div class="modal-content">
+
+
+        <!-- CLOSE -->
+
+        <span
+            class="close"
+            onclick="closeJobModal()">
+
+            &times;
+
+        </span>
+
+
+
+        <!-- TITLE -->
+
+        <h2 id="modalTitle">
+            Job Details
+        </h2>
+
+
+
+        <!-- STATUS -->
+
+        <div
+            class="modal-status"
+            id="modalStatus">
+
+            Approved
+
+        </div>
+
+
+
+        <!-- =================================================
+             BASIC DETAILS
+        ================================================= -->
+
+        <div class="detail-grid">
+
+
+            <div>
+
+                <strong>
+                    🏢 Company
+                </strong>
+
+                <span id="modalCompany"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    📍 Location
+                </strong>
+
+                <span id="modalLocation"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    💰 Salary
+                </strong>
+
+                <span id="modalSalary"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    👥 Vacancies
+                </strong>
+
+                <span id="modalVacancies"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    💼 Job Type
+                </strong>
+
+                <span id="modalJobType"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    ⏳ Experience
+                </strong>
+
+                <span id="modalExperience"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    🎓 Education
+                </strong>
+
+                <span id="modalEducation"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    📅 Deadline
+                </strong>
+
+                <span id="modalDeadline"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    🗓 Working Days
+                </strong>
+
+                <span id="modalWorkingDays"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    ⏰ Timing
+                </strong>
+
+                <span id="modalTiming"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    👤 User Type
+                </strong>
+
+                <span id="modalUserType"></span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    🏠 Work Mode
+                </strong>
+
+                <span id="modalWorkMode"></span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             SKILLS
+        ================================================= -->
+
+        <div class="modal-section">
+
+            <h3>
+                🛠 Skills Required
+            </h3>
+
+            <div id="modalSkills"></div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             INCENTIVES
+        ================================================= -->
+
+        <div class="modal-section">
+
+            <h3>
+                🎁 Incentives / Benefits
+            </h3>
+
+            <p id="modalIncentives">
+                No incentives specified
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DESCRIPTION
+        ================================================= -->
+
+        <div class="modal-section">
+
+            <h3>
+                📝 Job Description
+            </h3>
+
+            <p id="modalDescription">
+                No description available.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ML FIELD
+        ================================================= -->
+
+        <div class="modal-section">
+
+            <h3>
+                🤖 Predicted Job Field
+            </h3>
+
+            <p id="modalField">
+                Not predicted
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             GPS LOCATION
+        ================================================= -->
+
+        <div class="modal-section">
+
+            <h3>
+                📍 GPS Location
+            </h3>
+
+
+            <div class="gps-box">
+
+
+                <div class="gps-item">
+
+                    <strong>
+                        Latitude
+                    </strong>
+
+                    <span id="modalLatitude">
+                        Not available
+                    </span>
+
+                </div>
+
+
+                <div class="gps-item">
+
+                    <strong>
+                        Longitude
+                    </strong>
+
+                    <span id="modalLongitude">
+                        Not available
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   JOB DATA
+========================================================= */
+
+let jobs = [];
+
+
+
+/* =========================================================
+   LOAD JOB DATA FROM FLASK
+========================================================= */
+
+fetch("/hr/manage-jobs-data")
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load job data"
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+
+    .then(function(data) {
+
+        jobs = data;
+
+        console.log(
+            "Job data loaded successfully:",
+            jobs
+        );
+
+    })
+
+
+    .catch(function(error) {
+
+        console.error(
+            "Error loading job data:",
+            error
+        );
+
+    });
+
+
+
+/* =========================================================
+   FIND JOB BY ID
+========================================================= */
+
+function getJobById(jobId) {
+
+    return jobs.find(function(job) {
+
+        return Number(job.id) === Number(jobId);
+
+    });
+
+}
+
+
+
+/* =========================================================
+   VIEW BUTTONS
+========================================================= */
+
+document
+    .querySelectorAll(".view-btn")
+    .forEach(function(button) {
+
+
+        button.addEventListener(
+            "click",
+            function() {
+
+
+                const jobId =
+                    this.getAttribute(
+                        "data-job-id"
+                    );
+
+
+                openJobModal(jobId);
+
+
+            }
+        );
+
+
+    });
+
+
+
+/* =========================================================
+   OPEN JOB MODAL
+========================================================= */
+
+function openJobModal(jobId) {
+
+
+    const job =
+        getJobById(jobId);
+
+
+    if (!job) {
+
+        alert(
+            "Job details are still loading. Please try again."
+        );
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       BASIC INFORMATION
+    ===================================================== */
+
+    document
+        .getElementById("modalTitle")
+        .textContent =
+            job.title ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalCompany")
+        .textContent =
+            job.company ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalLocation")
+        .textContent =
+            job.location ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalSalary")
+        .textContent =
+            job.salary ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalVacancies")
+        .textContent =
+            job.vacancies !== null &&
+            job.vacancies !== undefined
+                ? job.vacancies
+                : "Not specified";
+
+
+    document
+        .getElementById("modalJobType")
+        .textContent =
+            job.job_type ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalExperience")
+        .textContent =
+            job.experience ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalEducation")
+        .textContent =
+            job.education ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalDeadline")
+        .textContent =
+            job.deadline ||
+            "Not specified";
+
+
+
+    /* =====================================================
+       ADDITIONAL INFORMATION
+    ===================================================== */
+
+    document
+        .getElementById("modalWorkingDays")
+        .textContent =
+            job.working_days ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalTiming")
+        .textContent =
+            job.timing ||
+            "Not specified";
+
+
+    document
+        .getElementById("modalUserType")
+        .textContent =
+            job.user_type ||
+            "All";
+
+
+    document
+        .getElementById("modalWorkMode")
+        .textContent =
+            job.work_mode ||
+            "Not specified";
+
+
+
+    /* =====================================================
+       INCENTIVES
+    ===================================================== */
+
+    document
+        .getElementById("modalIncentives")
+        .textContent =
+            job.incentives ||
+            "No incentives specified";
+
+
+
+    /* =====================================================
+       DESCRIPTION
+    ===================================================== */
+
+    document
+        .getElementById("modalDescription")
+        .textContent =
+            job.description ||
+            "No description available.";
+
+
+
+    /* =====================================================
+       ML PREDICTED FIELD
+    ===================================================== */
+
+    document
+        .getElementById("modalField")
+        .textContent =
+            job.field ||
+            "Not predicted";
+
+
+
+    /* =====================================================
+       STATUS
+    ===================================================== */
+
+    document
+        .getElementById("modalStatus")
+        .textContent =
+            job.status ||
+            "Approved";
+
+
+
+    /* =====================================================
+       GPS LATITUDE
+    ===================================================== */
+
+    document
+        .getElementById("modalLatitude")
+        .textContent =
+
+            job.latitude !== null &&
+            job.latitude !== undefined &&
+            job.latitude !== ""
+
+                ? job.latitude
+
+                : "Not available";
+
+
+
+    /* =====================================================
+       GPS LONGITUDE
+    ===================================================== */
+
+    document
+        .getElementById("modalLongitude")
+        .textContent =
+
+            job.longitude !== null &&
+            job.longitude !== undefined &&
+            job.longitude !== ""
+
+                ? job.longitude
+
+                : "Not available";
+
+
+
+    /* =====================================================
+       SKILLS
+    ===================================================== */
+
+    const skillsContainer =
+        document.getElementById(
+            "modalSkills"
+        );
+
+
+    skillsContainer.innerHTML = "";
+
+
+
+    if (
+
+        job.skills &&
+
+        typeof job.skills === "string" &&
+
+        job.skills.trim() !== ""
+
+    ) {
+
+
+        const skills =
+            job.skills.split(",");
+
+
+        skills.forEach(
+            function(skill) {
+
+
+                const span =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                span.className =
+                    "tag";
+
+
+                span.textContent =
+                    skill.trim();
+
+
+                skillsContainer
+                    .appendChild(span);
+
+
+            }
+        );
+
+
+    } else {
+
+
+        skillsContainer.textContent =
+            "No skills specified";
+
+
+    }
+
+
+
+    /* =====================================================
+       SHOW MODAL
+    ===================================================== */
+
+    const modal =
+        document.getElementById(
+            "jobModal"
+        );
+
+
+    if (modal) {
+
+        modal.style.display =
+            "block";
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeJobModal() {
+
+
+    const modal =
+        document.getElementById(
+            "jobModal"
+        );
+
+
+    if (modal) {
+
+        modal.style.display =
+            "none";
+
+    }
+
+
+    document.body.style.overflow =
+        "auto";
+
+}
+
+
+
+/* =========================================================
+   CLICK OUTSIDE MODAL
+========================================================= */
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+
+        const modal =
+            document.getElementById(
+                "jobModal"
+            );
+
+
+        if (
+
+            modal &&
+
+            event.target === modal
+
+        ) {
+
+            closeJobModal();
+
+        }
+
+
+    }
+);
+
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+
+        if (event.key === "Escape") {
+
+            closeJobModal();
+
+        }
+
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

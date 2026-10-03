@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Shortlisted Candidates</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#eef2f7;
+}
+
+.sidebar{
+position:fixed;
+width:240px;
+height:100vh;
+background:#0F4C81;
+padding-top:20px;
+}
+
+.sidebar h2{
+color:white;
+text-align:center;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+padding:15px 25px;
+text-decoration:none;
+transition:.3s;
+}
+
+.sidebar a:hover{
+background:#08365b;
+}
+
+.main{
+margin-left:240px;
+padding:30px;
+}
+
+h1{
+margin-bottom:25px;
+color:#0F4C81;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+th{
+background:#0F4C81;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+background:#f5f5f5;
+}
+
+.download{
+background:#2563eb;
+color:white;
+padding:8px 15px;
+text-decoration:none;
+border-radius:6px;
+}
+
+.status{
+color:green;
+font-weight:bold;
+}
+
+
+
+.search{
+    margin-bottom:20px;
+}
+
+.search form{
+    display:flex;
+    gap:10px;
+}
+
+.search input{
+    width:350px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.search button{
+    background:#0F4C81;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.search button:hover{
+    background:#08365b;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>HR Panel</h2>
+
+<a href="{{ url_for('hr_dashboard') }}">🏠 Dashboard</a>
+<a href="{{ url_for('post_job') }}">➕ Post Job</a>
+<a href="{{ url_for('manage_jobs') }}">📄 Manage Jobs</a>
+<a href="{{ url_for('applicants') }}">👥 Applicants</a>
+<a href="{{ url_for('shortlisted') }}">📨 Shortlisted</a>
+<a href="{{ url_for('hr_settings') }}">
+        ⚙️ Settings
+    </a>
+
+    <a href="{{ url_for('hr_profile') }}">
+    👤 My Profile
+</a>
+<a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>Shortlisted Candidates</h1>
+
+
+<div class="search">
+
+<form method="GET" action="{{ url_for('shortlisted') }}">
+
+<input
+type="text"
+name="search"
+placeholder="🔍 Search Candidate / Email / Job"
+value="{{ request.args.get('search','') }}">
+
+<button class="btn">Search</button>
+
+</form>
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Name</th>
+<th>Email</th>
+<th>Mobile</th>
+<th>Job</th>
+<th>Status</th>
+<th>Resume</th>
+
+</tr>
+
+{% for application, user, job in shortlisted %}
+
+<tr>
+
+<td>{{ user.name }}</td>
+
+<td>{{ user.email }}</td>
+
+<td>{{ user.mobile }}</td>
+
+<td>{{ job.title }}</td>
+
+<td class="status">{{ application.status }}</td>
+
+<td>
+
+{% if user.resume %}
+
+<a
+class="download"
+href="{{ url_for('static', filename='uploads/resumes/' + user.resume) }}"
+target="_blank">
+
+{{ user.resume }}
+
+</a>
+
+{% else %}
+
+No Resume
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+<td colspan="6">
+
+No shortlisted candidates found.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+
+    <style>
+        body{
+            font-family: Segoe UI, sans-serif;
+            background:#eef2f7;
+        }
+
+        .container{
+            width:400px;
+            margin:80px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,.2);
+        }
+
+        h2{
+            text-align:center;
+            color:#0F4C81;
+            margin-bottom:25px;
+        }
+
+        input{
+            width:100%;
+            box-sizing:border-box;
+            padding:12px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:8px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#0F4C81;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#08365b;
+        }
+
+        .message{
+            background:#f8d7da;
+            color:#721c24;
+            padding:10px;
+            border-radius:5px;
+            margin-bottom:15px;
+            text-align:center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Admin Login</h2>
+
+    <!-- Flask messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Login form -->
+    <form method="POST" action="{{ url_for('admin_login') }}">
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Admin Email"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

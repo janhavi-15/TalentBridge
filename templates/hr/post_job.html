@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Post New Job</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+body{
+    background:#eef3f8;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:260px;
+    height:100vh;
+
+    background:linear-gradient(
+        180deg,
+        #1e3c72,
+        #2a5298
+    );
+
+    position:fixed;
+    left:0;
+    top:0;
+
+    overflow:auto;
+
+    box-shadow:3px 0 15px rgba(0,0,0,.2);
+}
+
+.sidebar h2{
+    color:white;
+    text-align:center;
+    padding:25px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.2);
+}
+
+.sidebar a{
+    display:block;
+
+    color:white;
+    text-decoration:none;
+
+    padding:16px 25px;
+
+    transition:.3s;
+
+    font-size:16px;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,.15);
+    padding-left:35px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:260px;
+    padding:40px;
+}
+
+/* ================= CARD ================= */
+
+.card{
+
+    max-width:950px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.12);
+}
+
+.card h1{
+
+    text-align:center;
+
+    color:#1e3c72;
+
+    margin-bottom:30px;
+}
+
+/* ================= FORM ================= */
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+
+    display:block;
+
+    font-weight:600;
+
+    color:#333;
+
+    margin-bottom:8px;
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:13px 15px;
+
+    border:1px solid #dcdcdc;
+
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#1e88e5;
+
+    box-shadow:
+        0 0 8px rgba(30,136,229,.2);
+}
+
+textarea{
+    resize:vertical;
+}
+
+/* ================= ROW ================= */
+
+.row{
+
+    display:flex;
+
+    gap:20px;
+}
+
+.col{
+    flex:1;
+}
+
+/* ================= GPS ================= */
+
+.gps-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:15px;
+}
+
+.gps-button{
+
+    padding:11px 18px;
+
+    border:1px solid #2563eb;
+
+    background:#eff6ff;
+
+    color:#2563eb;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+.gps-button:hover{
+
+    background:#2563eb;
+
+    color:white;
+}
+
+#gpsStatus{
+
+    color:#666;
+
+    font-size:14px;
+}
+
+.gps-success{
+
+    color:#15803d !important;
+
+    font-weight:bold;
+}
+
+/* GPS coordinates box */
+
+.coordinates{
+
+    display:none;
+
+    background:#f0fdf4;
+
+    border:1px solid #bbf7d0;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
+
+    font-size:14px;
+
+    color:#166534;
+}
+
+/* ================= ML FIELD ================= */
+
+.ml-info{
+
+    background:#eff6ff;
+
+    border:1px solid #bfdbfe;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin:20px 0;
+
+    color:#1e40af;
+
+    line-height:1.6;
+}
+
+/* ================= CHECKBOX ================= */
+
+.checkbox-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:15px 0;
+}
+
+.checkbox-row input{
+
+    width:auto;
+
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+
+    width:100%;
+
+    background:#28a745;
+
+    color:white;
+
+    border:none;
+
+    padding:15px;
+
+    font-size:18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    margin-top:15px;
+}
+
+.btn:hover{
+
+    background:#218838;
+
+    transform:translateY(-2px);
+}
+
+/* ================= BACK ================= */
+
+.back{
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    text-decoration:none;
+
+    color:#1e3c72;
+
+    font-weight:bold;
+}
+
+.back:hover{
+    color:#1565c0;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    .sidebar{
+
+        width:100%;
+
+        height:auto;
+
+        position:relative;
+    }
+
+    .main{
+
+        margin-left:0;
+
+        padding:20px;
+    }
+
+    .row{
+
+        flex-direction:column;
+    }
+
+    .gps-box{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================================= -->
+<!-- SIDEBAR -->
+<!-- ================================================= -->
+
+<div class="sidebar">
+
+    <h2>HR Panel</h2>
+
+    <a href="{{ url_for('hr_dashboard') }}">
+        🏠 Dashboard
+    </a>
+
+    <a href="{{ url_for('post_job') }}">
+        ➕ Post Job
+    </a>
+
+    <a href="{{ url_for('manage_jobs') }}">
+        📄 Manage Jobs
+    </a>
+
+    <a href="{{ url_for('applicants') }}">
+        👥 Applicants
+    </a>
+
+    <a href="{{ url_for('shortlisted') }}">
+        📨 Shortlisted
+    </a>
+
+    <a href="{{ url_for('hr_settings') }}">
+        ⚙️ Settings
+    </a>
+
+    
+
+    <a href="{{ url_for('hr_profile') }}">
+    👤 My Profile
+</a>
+
+    <a href="{{ url_for('logout') }}">
+        🚪 Logout
+    </a>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- MAIN -->
+<!-- ================================================= -->
+
+<div class="main">
+
+<div class="card">
+
+<h1>📢 Post New Job</h1>
+
+
+<form method="POST">
+
+
+<!-- ================================================= -->
+<!-- BASIC INFORMATION -->
+<!-- ================================================= -->
+
+<div class="row">
+
+<div class="col">
+
+<label>Job Title *</label>
+
+<input
+    type="text"
+    name="title"
+    placeholder="Example: Software Engineer"
+    required
+>
+
+</div>
+
+
+<div class="col">
+
+<label>Company Name *</label>
+
+<input
+    type="text"
+    name="company"
+    placeholder="Example: ABC Pvt Ltd"
+    required
+>
+
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- LOCATION -->
+<!-- ================================================= -->
+
+<label>Job Location *</label>
+
+<input
+    type="text"
+    name="location"
+    id="jobLocation"
+    placeholder="Example: Mumbai, Maharashtra"
+    required
+>
+
+
+<br>
+
+
+<label>Job Location GPS</label>
+
+
+<div class="gps-box">
+
+<button
+    type="button"
+    class="gps-button"
+    onclick="getJobLocation()"
+>
+
+📍 Detect Job Location
+
+</button>
+
+
+<span id="gpsStatus">
+
+Location not detected
+
+</span>
+
+</div>
+
+
+<!-- IMPORTANT: These values are sent to Flask -->
+
+<input
+    type="hidden"
+    name="latitude"
+    id="jobLatitude"
+>
+
+
+<input
+    type="hidden"
+    name="longitude"
+    id="jobLongitude"
+>
+
+
+<div
+    id="coordinates"
+    class="coordinates"
+>
+
+    <strong>GPS Coordinates:</strong>
+
+    <br>
+
+    Latitude:
+    <span id="showLatitude"></span>
+
+    <br>
+
+    Longitude:
+    <span id="showLongitude"></span>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- SALARY + VACANCIES -->
+<!-- ================================================= -->
+
+<div class="row">
+
+<div class="col">
+
+<label>Salary *</label>
+
+<input
+    type="text"
+    name="salary"
+    placeholder="₹5,00,000 - ₹8,00,000 Per Year"
+    required
+>
+
+</div>
+
+
+<div class="col">
+
+<label>Number of Vacancies *</label>
+
+<input
+    type="number"
+    name="vacancies"
+    min="1"
+    placeholder="5"
+    required
+>
+
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- JOB TYPE -->
+<!-- ================================================= -->
+
+<label>Job Type *</label>
+
+<select
+    name="job_type"
+    required
+>
+
+<option value="">
+    -- Select Job Type --
+</option>
+
+<option value="Full Time">
+    Full Time
+</option>
+
+<option value="Part Time">
+    Part Time
+</option>
+
+<option value="Internship">
+    Internship
+</option>
+
+<option value="Contract">
+    Contract
+</option>
+
+</select>
+
+
+<br><br>
+
+
+<!-- ================================================= -->
+<!-- WORK MODE -->
+<!-- ================================================= -->
+
+<label>Work Mode *</label>
+
+<select
+    name="work_mode"
+    required
+>
+
+<option value="">
+    -- Select Work Mode --
+</option>
+
+<option value="Work From Office">
+    Work From Office
+</option>
+
+<option value="Hybrid">
+    Hybrid
+</option>
+
+<option value="Remote">
+    Remote
+</option>
+
+</select>
+
+
+<br><br>
+
+
+<!-- ================================================= -->
+<!-- WORKING DAYS -->
+<!-- ================================================= -->
+
+<label>Working Days</label>
+
+<select name="working_days">
+
+<option value="Monday - Friday">
+    Monday - Friday
+</option>
+
+<option value="Monday - Saturday">
+    Monday - Saturday
+</option>
+
+<option value="Flexible">
+    Flexible
+</option>
+
+<option value="Weekends">
+    Weekends
+</option>
+
+</select>
+
+
+<br><br>
+
+
+<!-- ================================================= -->
+<!-- TIMING -->
+<!-- ================================================= -->
+
+<label>Timing</label>
+
+<select name="timing">
+
+<option value="Day Shift">
+    Day Shift
+</option>
+
+<option value="Night Shift">
+    Night Shift
+</option>
+
+<option value="Flexible">
+    Flexible
+</option>
+
+<option value="Rotational">
+    Rotational
+</option>
+
+</select>
+
+
+<br><br>
+
+
+<!-- ================================================= -->
+<!-- USER TYPE -->
+<!-- ================================================= -->
+
+<label>User Type</label>
+
+<select name="user_type">
+
+<option value="All">
+    Open to All
+</option>
+
+<option value="Fresher">
+    Fresher
+</option>
+
+<option value="Experienced">
+    Experienced
+</option>
+
+</select>
+
+
+<!-- ================================================= -->
+<!-- QUICK APPLY -->
+<!-- ================================================= -->
+
+<div class="checkbox-row">
+
+<input
+    type="checkbox"
+    name="quick_apply"
+    id="quickApply"
+>
+
+<label
+    for="quickApply"
+    style="margin:0;"
+>
+
+⚡ Quick Apply
+
+</label>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- EXPERIENCE -->
+<!-- ================================================= -->
+
+<label>Experience Required *</label>
+
+<select
+    name="experience"
+    required
+>
+
+<option value="">
+    -- Select Experience --
+</option>
+
+<option value="Fresher">
+    Fresher
+</option>
+
+<option value="0-1 Years">
+    0-1 Years
+</option>
+
+<option value="1-3 Years">
+    1-3 Years
+</option>
+
+<option value="3-5 Years">
+    3-5 Years
+</option>
+
+<option value="5-8 Years">
+    5-8 Years
+</option>
+
+<option value="8+ Years">
+    8+ Years
+</option>
+
+</select>
+
+
+<br><br>
+
+
+<!-- ================================================= -->
+<!-- EDUCATION -->
+<!-- ================================================= -->
+
+<label>Education Required *</label>
+
+<select
+    name="education"
+    required
+>
+
+<option value="">
+    -- Select Qualification --
+</option>
+
+<option value="10th Pass">
+    10th Pass
+</option>
+
+<option value="12th Pass">
+    12th Pass
+</option>
+
+<option value="Diploma">
+    Diploma
+</option>
+
+<option value="BCA">
+    BCA
+</option>
+
+<option value="B.Sc">
+    B.Sc
+</option>
+
+<option value="B.E/B.Tech">
+    B.E/B.Tech
+</option>
+
+<option value="MCA">
+    MCA
+</option>
+
+<option value="M.Sc">
+    M.Sc
+</option>
+
+<option value="MBA">
+    MBA
+</option>
+
+<option value="Any Graduate">
+    Any Graduate
+</option>
+
+</select>
+
+
+<br><br>
+
+
+<!-- ================================================= -->
+<!-- SKILLS -->
+<!-- ================================================= -->
+
+<label>Skills Required *</label>
+
+<textarea
+    name="skills"
+    rows="5"
+    placeholder="Example:
+Python
+SQL
+Machine Learning
+Flask
+Communication Skills"
+    required
+></textarea>
+
+
+<br>
+
+
+<!-- ================================================= -->
+<!-- ML INFORMATION -->
+<!-- ================================================= -->
+
+<div class="ml-info">
+
+<strong>🤖 AI Job Classification</strong>
+
+<br>
+
+The system will automatically analyze the:
+
+<strong>
+Job Title + Description + Skills
+</strong>
+
+and use the ML model to classify the job into the appropriate field such as:
+
+<strong>
+IT, Healthcare, Finance, Education, Sales, Marketing, HR, Engineering
+</strong>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- BENEFITS -->
+<!-- ================================================= -->
+
+<label>Incentives / Benefits</label>
+
+<textarea
+    name="incentives"
+    rows="4"
+    placeholder="Example:
+Health Insurance
+Performance Bonus
+Free Lunch
+Cab Facility
+Work From Home"
+></textarea>
+
+
+<br>
+
+
+<!-- ================================================= -->
+<!-- DEADLINE -->
+<!-- ================================================= -->
+
+<label>Application Deadline *</label>
+
+<input
+    type="date"
+    name="deadline"
+    required
+>
+
+
+<br><br>
+
+
+<!-- ================================================= -->
+<!-- DESCRIPTION -->
+<!-- ================================================= -->
+
+<label>Job Description *</label>
+
+<textarea
+    name="description"
+    rows="8"
+    placeholder="Write complete job description..."
+    required
+></textarea>
+
+
+<!-- ================================================= -->
+<!-- SUBMIT -->
+<!-- ================================================= -->
+
+<button
+    class="btn"
+    type="submit"
+>
+
+📢 Post Job
+
+</button>
+
+
+</form>
+
+
+<a
+    class="back"
+    href="{{ url_for('hr_dashboard') }}"
+>
+
+⬅ Back to Dashboard
+
+</a>
+
+
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- GPS JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+function getJobLocation(){
+
+    const status =
+        document.getElementById("gpsStatus");
+
+    const latitudeInput =
+        document.getElementById("jobLatitude");
+
+    const longitudeInput =
+        document.getElementById("jobLongitude");
+
+    const coordinates =
+        document.getElementById("coordinates");
+
+    const showLatitude =
+        document.getElementById("showLatitude");
+
+    const showLongitude =
+        document.getElementById("showLongitude");
+
+
+    /* Browser GPS support */
+
+    if(!navigator.geolocation){
+
+        status.innerText =
+            "❌ GPS is not supported by your browser.";
+
+        return;
+
+    }
+
+
+    status.innerText =
+        "📍 Detecting location...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+
+            /* Save GPS values */
+
+            latitudeInput.value =
+                latitude;
+
+            longitudeInput.value =
+                longitude;
+
+
+            /* Show values */
+
+            showLatitude.innerText =
+                latitude.toFixed(6);
+
+            showLongitude.innerText =
+                longitude.toFixed(6);
+
+
+            coordinates.style.display =
+                "block";
+
+
+            status.innerText =
+                "✓ Job location detected";
+
+
+            status.classList.add(
+                "gps-success"
+            );
+
+
+            console.log(
+                "Job Latitude:",
+                latitude
+            );
+
+            console.log(
+                "Job Longitude:",
+                longitude
+            );
+
+        },
+
+
+        function(error){
+
+            console.log(error);
+
+
+            if(error.code === 1){
+
+                status.innerText =
+                    "❌ Location permission denied.";
+
+            }
+
+            else if(error.code === 2){
+
+                status.innerText =
+                    "❌ Location unavailable.";
+
+            }
+
+            else if(error.code === 3){
+
+                status.innerText =
+                    "❌ Location request timed out.";
+
+            }
+
+            else{
+
+                status.innerText =
+                    "❌ Unable to detect location.";
+
+            }
+
+        },
+
+
+        {
+            enableHighAccuracy:true,
+
+            timeout:10000,
+
+            maximumAge:0
+        }
+
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

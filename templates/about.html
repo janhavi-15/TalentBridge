@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | TalentBridge</title>
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f9fd;
+            color: #141b2d;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+
+            height: 108px;
+
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3.3%;
+
+            border-bottom: 1px solid #edf0f4;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+            position: relative;
+            z-index: 10;
+        }
+
+
+        .logo {
+
+            text-decoration: none;
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            color: #111827;
+
+            letter-spacing: -1.5px;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 42px;
+
+            list-style: none;
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: #141b2d;
+
+            font-size: 19px;
+
+            font-weight: 500;
+
+            transition: 0.25s;
+        }
+
+
+        .nav-links a:hover {
+
+            color: #17558c;
+        }
+
+
+        .nav-links a.active {
+
+            color: #17558c;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+
+            background: #f4f9fd;
+
+            padding: 65px 20px 55px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #edf2f6;
+        }
+
+
+        .hero h1 {
+
+            font-size: 48px;
+
+            font-weight: 800;
+
+            color: #17558c;
+
+            margin-bottom: 15px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .hero p {
+
+            max-width: 720px;
+
+            margin: auto;
+
+            color: #607b96;
+
+            font-size: 18px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: 45px auto;
+        }
+
+
+        /* =====================================================
+           INTRO CARD
+        ===================================================== */
+
+        .intro {
+
+            background: #ffffff;
+
+            border: 1px solid #e1e8ef;
+
+            border-radius: 12px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 20px rgba(30, 65, 100, 0.06);
+
+            margin-bottom: 35px;
+
+            border-top: 4px solid #20c765;
+        }
+
+
+        .intro h2 {
+
+            color: #17558c;
+
+            font-size: 29px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .intro p {
+
+            max-width: 850px;
+
+            margin: auto;
+
+            color: #64788e;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           CANDIDATE / EMPLOYER CARDS
+        ===================================================== */
+
+        .role-container {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 25px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .role-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e1e8ef;
+
+            border-top: 4px solid #20c765;
+
+            border-radius: 12px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 5px 20px rgba(30, 65, 100, 0.06);
+
+            transition: 0.25s;
+        }
+
+
+        .role-card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 28px rgba(30, 65, 100, 0.10);
+        }
+
+
+        .role-card h2 {
+
+            color: #17558c;
+
+            font-size: 23px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .role-card ul {
+
+            list-style: none;
+        }
+
+
+        .role-card li {
+
+            padding: 10px 0;
+
+            color: #61758b;
+
+            font-size: 14px;
+
+            border-bottom: 1px solid #edf1f4;
+        }
+
+
+        .role-card li:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .check {
+
+            color: #20b85a;
+
+            font-weight: bold;
+
+            margin-right: 8px;
+        }
+
+
+        /* =====================================================
+           SECTION TITLE
+        ===================================================== */
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+
+        .section-title h2 {
+
+            color: #172b4d;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .section-title p {
+
+            color: #718198;
+
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ===================================================== */
+
+        .features {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .feature {
+
+            background: #ffffff;
+
+            border: 1px solid #e1e8ef;
+
+            border-radius: 10px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 18px rgba(30, 65, 100, 0.05);
+
+            transition: 0.25s;
+        }
+
+
+        .feature:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 9px 25px rgba(30, 65, 100, 0.09);
+
+            border-color: #b9d2e7;
+        }
+
+
+        .feature-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            margin: 0 auto 14px;
+
+            border-radius: 50%;
+
+            background: #eaf7ef;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+
+        .feature h3 {
+
+            color: #17558c;
+
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .feature p {
+
+            color: #687b90;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           HOW IT WORKS
+        ===================================================== */
+
+        .process {
+
+            background: #ffffff;
+
+            border: 1px solid #e1e8ef;
+
+            border-radius: 12px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 5px 20px rgba(30, 65, 100, 0.06);
+
+            margin-bottom: 45px;
+        }
+
+
+        .steps {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 20px;
+
+            margin-top: 25px;
+        }
+
+
+        .step {
+
+            text-align: center;
+
+            padding: 10px;
+        }
+
+
+        .step-number {
+
+            width: 45px;
+
+            height: 45px;
+
+            margin: 0 auto 12px;
+
+            background: #17558c;
+
+            color: #ffffff;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        .step h3 {
+
+            color: #172b4d;
+
+            font-size: 17px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .step p {
+
+            color: #687b90;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta {
+
+            background: #17558c;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 40px 25px;
+
+            border-radius: 12px;
+
+            margin-bottom: 50px;
+        }
+
+
+        .cta h2 {
+
+            font-size: 28px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .cta p {
+
+            color: #e3eef7;
+
+            font-size: 15px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .cta-button {
+
+            display: inline-block;
+
+            padding: 11px 23px;
+
+            background: white;
+
+            color: #17558c;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            transition: 0.25s;
+        }
+
+
+        .cta-button:hover {
+
+            background: #eef5fa;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            background: #111827;
+
+            color: white;
+
+            padding: 28px 5% 20px;
+
+            text-align: center;
+        }
+
+
+        .footer-logo {
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+
+        .footer-text {
+
+            color: #aab4c2;
+
+            font-size: 13px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .copyright {
+
+            padding-top: 15px;
+
+            border-top: 1px solid #273244;
+
+            color: #8793a3;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+
+                height: auto;
+
+                padding: 20px 25px;
+
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+
+            .logo {
+
+                font-size: 32px;
+            }
+
+
+            .nav-links {
+
+                gap: 20px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+
+            .nav-links a {
+
+                font-size: 16px;
+            }
+
+
+            .features {
+
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+
+            .steps {
+
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .hero h1 {
+
+                font-size: 36px;
+            }
+
+
+            .hero p {
+
+                font-size: 16px;
+            }
+
+
+            .container {
+
+                width: 92%;
+            }
+
+
+            .role-container {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .features {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .steps {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .intro,
+            .role-card,
+            .process {
+
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <a href="/" class="logo">
+        TalentBridge
+    </a>
+
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="/">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="/about" class="active">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('jobs') }}">
+                Jobs
+            </a>
+        </li>
+
+        <li>
+            <a href="/fields">
+                Fields
+            </a>
+        </li>
+
+        <li>
+            <a href="/salary-guide">
+                Salary Guide
+            </a>
+        </li>
+
+        <li>
+            <a href="/candidate/login">
+                Candidate Login
+            </a>
+        </li>
+
+    </ul>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <h1>
+        About TalentBridge
+    </h1>
+
+    <p>
+        Connecting talented candidates with the right
+        opportunities and helping employers find suitable talent.
+    </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="container">
+
+
+    <!-- INTRO -->
+
+    <section class="intro">
+
+        <h2>
+            Connecting Talent With Opportunity
+        </h2>
+
+        <p>
+            TalentBridge is a machine-learning based recruitment
+            platform that simplifies the process of finding jobs
+            and connecting candidates with employers.
+        </p>
+
+    </section>
+
+
+
+    <!-- CANDIDATES / EMPLOYERS -->
+
+    <section class="role-container">
+
+
+        <div class="role-card">
+
+            <h2>
+                👤 For Candidates
+            </h2>
+
+            <ul>
+
+                <li>
+                    <span class="check">✓</span>
+                    Create and manage profile
+                </li>
+
+                <li>
+                    <span class="check">✓</span>
+                    Upload resume
+                </li>
+
+                <li>
+                    <span class="check">✓</span>
+                    Search and filter jobs
+                </li>
+
+                <li>
+                    <span class="check">✓</span>
+                    Apply and save jobs
+                </li>
+
+                <li>
+                    <span class="check">✓</span>
+                    Track applications
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="role-card">
+
+            <h2>
+                🏢 For Employers
+            </h2>
+
+            <ul>
+
+                <li>
+                    <span class="check">✓</span>
+                    Create HR account
+                </li>
+
+                <li>
+                    <span class="check">✓</span>
+                    Post job opportunities
+                </li>
+
+                <li>
+                    <span class="check">✓</span>
+                    Manage job postings
+                </li>
+
+                <li>
+                    <span class="check">✓</span>
+                    View applications
+                </li>
+
+                <li>
+                    <span class="check">✓</span>
+                    Review suitable candidates
+                </li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FEATURES -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>
+                Why TalentBridge?
+            </h2>
+
+            <p>
+                Features designed to simplify recruitment.
+            </p>
+
+        </div>
+
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    Easy Job Search
+                </h3>
+
+                <p>
+                    Find jobs using relevant search and
+                    filtering options.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🎯
+                </div>
+
+                <h3>
+                    ML-Based Matching
+                </h3>
+
+                <p>
+                    Machine learning helps identify relevant
+                    job opportunities.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Resume Management
+                </h3>
+
+                <p>
+                    Candidates can maintain profiles and
+                    upload their resumes.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📍
+                </div>
+
+                <h3>
+                    Location-Based Search
+                </h3>
+
+                <p>
+                    Discover opportunities based on location
+                    and distance.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🏢
+                </div>
+
+                <h3>
+                    Employer Tools
+                </h3>
+
+                <p>
+                    Employers can post jobs and manage
+                    candidate applications.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Simple Recruitment
+                </h3>
+
+                <p>
+                    A streamlined platform for candidates
+                    and employers.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- HOW IT WORKS -->
+
+    <section class="process">
+
+        <div class="section-title">
+
+            <h2>
+                How TalentBridge Works
+            </h2>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    Create Profile
+                </h3>
+
+                <p>
+                    Add your skills, education and experience.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    Find Jobs
+                </h3>
+
+                <p>
+                    Search and explore available opportunities.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    Apply
+                </h3>
+
+                <p>
+                    Apply for jobs matching your profile.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    4
+                </div>
+
+                <h3>
+                    Connect
+                </h3>
+
+                <p>
+                    Employers review applications and connect
+                    with suitable candidates.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <h2>
+            Find Your Next Opportunity
+        </h2>
+
+        <p>
+            Explore available jobs and take the next step
+            in your career.
+        </p>
+
+        <a href="/jobs" class="cta-button">
+            Explore Jobs
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-logo">
+        TalentBridge
+    </div>
+
+    <div class="footer-text">
+        Connecting Talent With Opportunity
+    </div>
+
+    <div class="copyright">
+        © 2026 TalentBridge. All Rights Reserved.
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

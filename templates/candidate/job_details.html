@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>{{ job.title }}</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#eef2f7;
+}
+
+.header{
+background:#0F4C81;
+color:white;
+padding:20px 40px;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+width:80%;
+margin:40px auto;
+}
+
+.card{
+background:white;
+padding:35px;
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+h1{
+color:#0F4C81;
+margin-bottom:20px;
+}
+
+.info{
+margin:12px 0;
+font-size:18px;
+color:#444;
+}
+
+.section{
+margin-top:30px;
+}
+
+.section h3{
+color:#0F4C81;
+margin-bottom:10px;
+}
+
+.skills span{
+display:inline-block;
+background:#e3f2fd;
+color:#1565c0;
+padding:8px 15px;
+margin:5px;
+border-radius:20px;
+}
+
+.btn{
+display:inline-block;
+margin-top:30px;
+padding:14px 28px;
+background:#16a34a;
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-size:18px;
+font-weight:bold;
+}
+
+.btn:hover{
+background:#15803d;
+}
+
+.back{
+display:inline-block;
+margin-left:20px;
+margin-top:30px;
+text-decoration:none;
+font-size:18px;
+}
+
+
+
+.save-btn{
+background:#2563eb;
+color:white;
+padding:10px 18px;
+border-radius:8px;
+text-decoration:none;
+margin-left:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+Job Details
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h1>{{ job.title }}</h1>
+
+<div class="info">
+🏢 <b>Company :</b> {{ job.company }}
+</div>
+
+<div class="info">
+📍 <b>Location :</b> {{ job.location }}
+</div>
+
+<div class="info">
+💰 <b>Salary :</b> ₹{{ job.salary }}
+</div>
+
+<div class="info">
+💺 <b>Vacancies :</b> {{ job.vacancies }}
+</div>
+
+<div class="info">
+💼 <b>Job Type :</b> {{ job.job_type }}
+</div>
+
+<div class="info">
+⏳ <b>Experience :</b> {{ job.experience }}
+</div>
+
+<div class="info">
+🎓 <b>Education :</b> {{ job.education }}
+</div>
+
+<div class="info">
+📅 <b>Application Deadline :</b> {{ job.deadline }}
+</div>
+
+<div class="info">
+🎁 <b>Benefits :</b> {{ job.incentives }}
+</div>
+
+<div class="section">
+
+<h3>Required Skills</h3>
+
+<div class="skills">
+
+{% for skill in job.skills.split(',') %}
+<span>{{ skill }}</span>
+{% endfor %}
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h3>Job Description</h3>
+
+<p>
+
+{{ job.description }}
+
+</p>
+
+</div>
+
+<a class="btn"
+href="{{ url_for('apply_job', job_id=job.id) }}">
+
+Apply Now
+
+</a>
+
+
+
+
+
+<a href="{{ url_for('save_job', job_id=job.id) }}"
+class="save-btn">
+Save
+</a>
+
+
+
+<a class="back"
+href="{{ url_for('candidate_jobs') }}">
+
+⬅ Back
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Salary Guide | TalentBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f9fd;
+            color: #172b4d;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 108px;
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3.3%;
+
+            border-bottom: 1px solid #e8edf2;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-size: 40px;
+            font-weight: 800;
+            color: #111827;
+            letter-spacing: -1.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 42px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #141b2d;
+            font-size: 20px;
+            font-weight: 500;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: #17558c;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            text-align: center;
+            padding: 75px 20px 55px;
+            background: #f4f9fd;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            color: #17558c;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #63809c;
+            line-height: 1.6;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto 70px;
+        }
+
+        /* ================= OVERVIEW ================= */
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+            color: #17558c;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #6d8298;
+            font-size: 16px;
+        }
+
+        .salary-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-bottom: 65px;
+        }
+
+        .salary-card {
+            background: white;
+            border: 1px solid #e1e9ef;
+            border-top: 5px solid #20c76a;
+
+            border-radius: 14px;
+            padding: 32px 25px;
+
+            text-align: center;
+
+            box-shadow: 0 8px 25px rgba(30,65,100,0.07);
+
+            transition: 0.25s;
+        }
+
+        .salary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(30,65,100,0.12);
+        }
+
+        .salary-icon {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #e9fbf1;
+            color: #20a95b;
+
+            border-radius: 12px;
+
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .salary-card h3 {
+            color: #17558c;
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .salary-card p {
+            color: #6c8196;
+            font-size: 15px;
+        }
+
+        /* ================= JOB ROLES ================= */
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .role-card {
+            background: white;
+
+            border: 1px solid #e1e9ef;
+            border-top: 5px solid #20c76a;
+
+            border-radius: 14px;
+            padding: 25px;
+
+            box-shadow: 0 7px 22px rgba(30,65,100,0.06);
+
+            transition: 0.25s;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(30,65,100,0.11);
+        }
+
+        .role-icon {
+            width: 48px;
+            height: 48px;
+
+            background: #e9fbf1;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+
+            margin-bottom: 18px;
+        }
+
+        .role-card h3 {
+            font-size: 20px;
+            color: #17558c;
+            margin-bottom: 8px;
+        }
+
+        .field {
+            color: #71869c;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .salary {
+            color: #20a95b;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .salary span {
+            color: #8293a5;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        /* ================= NOTE ================= */
+
+        .note {
+            margin-top: 30px;
+
+            background: #ffffff;
+
+            border-left: 5px solid #20c76a;
+
+            padding: 18px 20px;
+
+            border-radius: 8px;
+
+            color: #687d92;
+            font-size: 14px;
+            line-height: 1.6;
+
+            box-shadow: 0 5px 18px rgba(30,65,100,0.05);
+        }
+
+        .note strong {
+            color: #17558c;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            margin-top: 65px;
+
+            background: #17558c;
+
+            border-radius: 15px;
+
+            padding: 42px 25px;
+
+            text-align: center;
+            color: white;
+
+            box-shadow: 0 8px 25px rgba(23,85,140,0.15);
+        }
+
+        .cta h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .cta p {
+            color: #e1edf7;
+            margin-bottom: 22px;
+        }
+
+        .cta-button {
+            display: inline-block;
+
+            background: #20c76a;
+            color: white;
+
+            padding: 12px 25px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            transition: 0.25s;
+        }
+
+        .cta-button:hover {
+            background: #19ad5b;
+            transform: translateY(-2px);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #111827;
+            color: white;
+
+            padding: 32px 5% 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .footer-text {
+            color: #aab4c2;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 22px auto 0;
+
+            padding-top: 16px;
+
+            border-top: 1px solid #273244;
+
+            text-align: center;
+
+            color: #8793a3;
+            font-size: 12px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .salary-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .roles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .nav-links a {
+                font-size: 16px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+                padding: 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .logo {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px 20px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .roles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="/" class="logo">
+        TalentBridge
+    </a>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="/">Home</a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('jobs') }}">Jobs</a>
+        </li>
+
+        <li>
+            <a href="/candidate-login">Candidate Login</a>
+        </li>
+
+        <li>
+            <a href="/hr-login">HR Login</a>
+        </li>
+
+    </ul>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <h1>Salary Guide</h1>
+
+    <p>
+        Explore estimated salary ranges for popular job roles in India.
+    </p>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <!-- Salary Overview -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>Salary Overview</h2>
+
+            <p>
+                Typical salary ranges based on experience level.
+            </p>
+
+        </div>
+
+
+        <div class="salary-cards">
+
+            <div class="salary-card">
+
+                <div class="salary-icon">₹</div>
+
+                <h3>₹3 – 5 LPA</h3>
+
+                <p>Entry Level</p>
+
+            </div>
+
+
+            <div class="salary-card">
+
+                <div class="salary-icon">₹</div>
+
+                <h3>₹5 – 10 LPA</h3>
+
+                <p>Mid Level</p>
+
+            </div>
+
+
+            <div class="salary-card">
+
+                <div class="salary-icon">₹</div>
+
+                <h3>₹10 – 18 LPA</h3>
+
+                <p>Experienced</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Popular Roles -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>Popular Job Roles</h2>
+
+            <p>
+                Estimated salary ranges for selected careers.
+            </p>
+
+        </div>
+
+
+        <div class="roles-grid">
+
+
+            <div class="role-card">
+
+                <div class="role-icon">💻</div>
+
+                <h3>Software Developer</h3>
+
+                <div class="field">
+                    IT & Software
+                </div>
+
+                <div class="salary">
+                    ₹3 – 18 LPA
+                    <span>overall</span>
+                </div>
+
+            </div>
+
+
+            <div class="role-card">
+
+                <div class="role-icon">📊</div>
+
+                <h3>Data Analyst</h3>
+
+                <div class="field">
+                    Data & Analytics
+                </div>
+
+                <div class="salary">
+                    ₹3 – 16 LPA
+                    <span>overall</span>
+                </div>
+
+            </div>
+
+
+            <div class="role-card">
+
+                <div class="role-icon">💰</div>
+
+                <h3>Accountant</h3>
+
+                <div class="field">
+                    Finance
+                </div>
+
+                <div class="salary">
+                    ₹2.5 – 12 LPA
+                    <span>overall</span>
+                </div>
+
+            </div>
+
+
+            <div class="role-card">
+
+                <div class="role-icon">👥</div>
+
+                <h3>HR Executive</h3>
+
+                <div class="field">
+                    Human Resources
+                </div>
+
+                <div class="salary">
+                    ₹2.5 – 12 LPA
+                    <span>overall</span>
+                </div>
+
+            </div>
+
+
+            <div class="role-card">
+
+                <div class="role-icon">📢</div>
+
+                <h3>Marketing Executive</h3>
+
+                <div class="field">
+                    Marketing
+                </div>
+
+                <div class="salary">
+                    ₹2.5 – 14 LPA
+                    <span>overall</span>
+                </div>
+
+            </div>
+
+
+            <div class="role-card">
+
+                <div class="role-icon">⚙️</div>
+
+                <h3>Civil Engineer</h3>
+
+                <div class="field">
+                    Engineering
+                </div>
+
+                <div class="salary">
+                    ₹3 – 15 LPA
+                    <span>overall</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="note">
+
+            <strong>Note:</strong>
+            Salary ranges are approximate and may vary depending on
+            experience, skills, company, location and industry.
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <h2>Find Your Next Opportunity</h2>
+
+        <p>
+            Explore jobs that match your skills and career goals.
+        </p>
+
+        <a href="{{ url_for('jobs') }}" class="cta-button">
+            Explore Jobs
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <div class="footer-logo">
+                TalentBridge
+            </div>
+
+            <div class="footer-text">
+                Connecting talent with the right opportunities.
+            </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="/">Home</a>
+
+            <a href="{{ url_for('jobs') }}">Jobs</a>
+
+            <a href="/candidate-login">Candidate Login</a>
+
+            <a href="/hr-login">HR Login</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 TalentBridge. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>

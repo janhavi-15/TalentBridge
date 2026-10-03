@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | TalentBridge</title>
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7faff;
+            color: #141b2d;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            height: 115px;
+
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3.3%;
+
+            border-bottom: 1px solid #edf0f4;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+
+            position: relative;
+            z-index: 10;
+        }
+
+
+        .logo {
+            text-decoration: none;
+
+            font-size: 40px;
+            font-weight: 800;
+
+            color: #111827;
+
+            letter-spacing: -1.5px;
+        }
+
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 42px;
+
+            list-style: none;
+        }
+
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #141b2d;
+
+            font-size: 20px;
+
+            font-weight: 500;
+
+            transition: 0.25s;
+        }
+
+
+        .nav-links a:hover {
+            color: #17558c;
+        }
+
+
+        .nav-links a.active {
+            color: #17558c;
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            background: #f4f9fd;
+
+            min-height: 285px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 55px 20px 50px;
+
+            border-bottom: 1px solid #edf2f6;
+        }
+
+
+        .hero-content {
+            max-width: 850px;
+
+            margin: auto;
+        }
+
+
+        .hero h1 {
+            font-size: 52px;
+
+            line-height: 1.15;
+
+            font-weight: 800;
+
+            color: #17558c;
+
+            margin-bottom: 20px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .hero p {
+            font-size: 21px;
+
+            line-height: 1.6;
+
+            color: #54718e;
+
+            max-width: 750px;
+
+            margin: auto;
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .container {
+            width: 90%;
+
+            max-width: 1150px;
+
+            margin: 55px auto 70px;
+        }
+
+
+        /* =====================================================
+           CONTACT LAYOUT
+        ===================================================== */
+
+        .contact-layout {
+            display: grid;
+
+            grid-template-columns: 0.85fr 1.15fr;
+
+            gap: 30px;
+
+            align-items: stretch;
+        }
+
+
+        /* =====================================================
+           CONTACT INFORMATION
+        ===================================================== */
+
+        .contact-info {
+            background: #17558c;
+
+            color: white;
+
+            border-radius: 12px;
+
+            padding: 38px 35px;
+
+            box-shadow:
+                0 8px 25px rgba(30, 65, 100, 0.10);
+        }
+
+
+        .contact-info h2 {
+            font-size: 28px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .contact-info > p {
+            color: #dceaf5;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 30px;
+        }
+
+
+        .contact-item {
+            display: flex;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+
+            align-items: flex-start;
+        }
+
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            border-radius: 7px;
+
+            background: rgba(255, 255, 255, 0.13);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+
+        .contact-item h3 {
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .contact-item p {
+            color: #dceaf5;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           CONTACT FORM
+        ===================================================== */
+
+        .contact-form {
+            background: #ffffff;
+
+            border: 1px solid #e1e8ef;
+
+            border-radius: 12px;
+
+            padding: 38px 35px;
+
+            box-shadow:
+                0 5px 20px rgba(30, 65, 100, 0.06);
+        }
+
+
+        .contact-form h2 {
+            font-size: 27px;
+
+            color: #172b4d;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-description {
+            color: #718198;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .form-row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+        }
+
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #344054;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+
+            width: 100%;
+
+            border: 1px solid #d6dee7;
+
+            border-radius: 6px;
+
+            padding: 13px 14px;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            font-size: 14px;
+
+            color: #172b4d;
+
+            background: #ffffff;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        .form-group input {
+            height: 46px;
+        }
+
+
+        .form-group select {
+            height: 46px;
+
+            cursor: pointer;
+        }
+
+
+        .form-group textarea {
+            min-height: 135px;
+
+            resize: vertical;
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #17558c;
+
+            box-shadow:
+                0 0 0 3px rgba(23, 85, 140, 0.08);
+        }
+
+
+        .submit-btn {
+            width: 100%;
+
+            border: none;
+
+            background: #17558c;
+
+            color: white;
+
+            padding: 13px 20px;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .submit-btn:hover {
+            background: #124772;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           QUICK HELP SECTION
+        ===================================================== */
+
+        .quick-section {
+            margin-top: 60px;
+        }
+
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+
+        .section-title h2 {
+            font-size: 29px;
+
+            color: #172b4d;
+
+            margin-bottom: 8px;
+        }
+
+
+        .section-title p {
+            color: #718198;
+
+            font-size: 14px;
+        }
+
+
+        .quick-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .quick-card {
+            background: #ffffff;
+
+            border: 1px solid #e1e8ef;
+
+            border-radius: 10px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            transition: 0.25s;
+        }
+
+
+        .quick-card:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 25px rgba(30, 65, 100, 0.08);
+        }
+
+
+        .quick-icon {
+            width: 45px;
+            height: 45px;
+
+            margin: 0 auto 14px;
+
+            border-radius: 50%;
+
+            background: #eaf3fa;
+
+            color: #17558c;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+
+        .quick-card h3 {
+            color: #172b4d;
+
+            font-size: 16px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .quick-card p {
+            color: #718198;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            margin-top: 70px;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 35px 5% 20px;
+        }
+
+
+        .footer-content {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .footer-logo {
+            font-size: 24px;
+
+            font-weight: 700;
+        }
+
+
+        .footer-text {
+            color: #aab4c2;
+
+            font-size: 13px;
+
+            margin-top: 7px;
+        }
+
+
+        .footer-links {
+            display: flex;
+
+            gap: 25px;
+        }
+
+
+        .footer-links a {
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            font-size: 13px;
+        }
+
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+
+        .copyright {
+            max-width: 1200px;
+
+            margin: 25px auto 0;
+
+            padding-top: 18px;
+
+            border-top: 1px solid #273244;
+
+            text-align: center;
+
+            color: #8793a3;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                padding: 0 25px;
+            }
+
+
+            .logo {
+                font-size: 32px;
+            }
+
+
+            .nav-links {
+                gap: 20px;
+            }
+
+
+            .nav-links a {
+                font-size: 16px;
+            }
+
+
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+
+            .quick-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: auto;
+
+                padding: 20px;
+
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+
+            .nav-links {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 14px 20px;
+            }
+
+
+            .hero {
+                min-height: 240px;
+
+                padding: 45px 20px;
+            }
+
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+
+            .hero p {
+                font-size: 16px;
+            }
+
+
+            .container {
+                width: 92%;
+
+                margin-top: 40px;
+            }
+
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+
+            .contact-info,
+            .contact-form {
+                padding: 28px 22px;
+            }
+
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .footer-content {
+                flex-direction: column;
+
+                text-align: center;
+
+                gap: 20px;
+            }
+
+
+            .footer-links {
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <a href="/" class="logo">
+        TalentBridge
+    </a>
+
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="/">
+                Home
+            </a>
+        </li>
+
+
+        <li>
+            <a href="{{ url_for('jobs') }}">
+                Jobs
+            </a>
+        </li>
+
+
+        <li>
+            <a href="/candidate-login">
+                Candidate Login
+            </a>
+        </li>
+
+
+        <li>
+            <a href="/hr-login">
+                HR Login
+            </a>
+        </li>
+
+    </ul>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Contact Us
+        </h1>
+
+        <p>
+            Have a question, need help, or want to know more
+            about TalentBridge? We are here to help.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="container">
+
+
+    <div class="contact-layout">
+
+
+        <!-- =================================================
+             CONTACT INFORMATION
+        ================================================= -->
+
+        <section class="contact-info">
+
+            <h2>
+                Get in Touch
+            </h2>
+
+            <p>
+                Whether you are a candidate looking for your next
+                opportunity or an employer searching for talented
+                professionals, our team is ready to assist you.
+            </p>
+
+
+            <!-- EMAIL -->
+
+            <div class="contact-item">
+
+                <div class="contact-icon">
+                    ✉
+                </div>
+
+                <div>
+
+                    <h3>
+                        Email
+                    </h3>
+
+                    <p>
+                        support@talentbridge.com
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="contact-item">
+
+                <div class="contact-icon">
+                    ☎
+                </div>
+
+                <div>
+
+                    <h3>
+                        Phone
+                    </h3>
+
+                    <p>
+                        +91 98765 43210
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="contact-item">
+
+                <div class="contact-icon">
+                    ●
+                </div>
+
+                <div>
+
+                    <h3>
+                        Office
+                    </h3>
+
+                    <p>
+                        Bengaluru, Karnataka, India
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- WORKING HOURS -->
+
+            <div class="contact-item">
+
+                <div class="contact-icon">
+                    ⏰
+                </div>
+
+                <div>
+
+                    <h3>
+                        Working Hours
+                    </h3>
+
+                    <p>
+                        Monday – Friday<br>
+                        9:00 AM – 6:00 PM
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONTACT FORM
+        ================================================= -->
+
+        <section class="contact-form">
+
+            <h2>
+                Send Us a Message
+            </h2>
+
+            <p class="form-description">
+                Fill out the form below and our team will get
+                back to you as soon as possible.
+            </p>
+
+
+            <form action="/contact" method="POST">
+
+    <div class="form-row">
+
+        <div class="form-group">
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="subject">
+            Subject
+        </label>
+
+        <select
+            id="subject"
+            name="subject"
+            required
+        >
+
+            <option value="">
+                Select a subject
+            </option>
+
+            <option value="Candidate Support">
+                Candidate Support
+            </option>
+
+            <option value="Job Application">
+                Job Application
+            </option>
+
+            <option value="Employer / HR Support">
+                Employer / HR Support
+            </option>
+
+            <option value="Technical Issue">
+                Technical Issue
+            </option>
+
+            <option value="General Enquiry">
+                General Enquiry
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="message">
+            Message
+        </label>
+
+        <textarea
+            id="message"
+            name="message"
+            placeholder="Write your message here..."
+            required
+        ></textarea>
+
+    </div>
+
+
+    <button
+        type="submit"
+        class="submit-btn"
+    >
+        Send Message
+    </button>
+
+</form>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =================================================
+         QUICK HELP
+    ================================================= -->
+
+    <section class="quick-section">
+
+
+        <div class="section-title">
+
+            <h2>
+                How Can We Help?
+            </h2>
+
+            <p>
+                Choose the type of assistance you need.
+            </p>
+
+        </div>
+
+
+        <div class="quick-grid">
+
+
+            <div class="quick-card">
+
+                <div class="quick-icon">
+                    ✓
+                </div>
+
+                <h3>
+                    Job Seekers
+                </h3>
+
+                <p>
+                    Need help finding jobs, applying for positions,
+                    or managing your candidate profile?
+                </p>
+
+            </div>
+
+
+            <div class="quick-card">
+
+                <div class="quick-icon">
+                    ◆
+                </div>
+
+                <h3>
+                    Employers
+                </h3>
+
+                <p>
+                    Need assistance posting jobs or finding
+                    suitable candidates for your company?
+                </p>
+
+            </div>
+
+
+            <div class="quick-card">
+
+                <div class="quick-icon">
+                    ?
+                </div>
+
+                <h3>
+                    General Support
+                </h3>
+
+                <p>
+                    Have a technical problem or another question
+                    about TalentBridge?
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-content">
+
+
+        <div>
+
+            <div class="footer-logo">
+                TalentBridge
+            </div>
+
+            <div class="footer-text">
+                Connecting talent with the right opportunities.
+            </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="{{ url_for('jobs') }}">
+                Jobs
+            </a>
+
+            <a href="/candidate-login">
+                Candidate Login
+            </a>
+
+            <a href="/hr-login">
+                HR Login
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 TalentBridge. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>
